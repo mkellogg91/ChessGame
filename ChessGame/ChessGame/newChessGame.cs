@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    class KingPiece : ChessPiece
+    class newChessGame
     {
 
-        // METHODS
-        public void pieceMove(KingPiece king)
+        public newChessGame()
         {
-
+            ChessBoard chessBoard = new ChessBoard();
         }
 
     }

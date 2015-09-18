@@ -8,5 +8,12 @@ namespace ChessGame
 {
     class PawnPiece : ChessPiece
     {
+
+        // METHODS
+        public void pieceMove(PawnPiece pawn)
+        {
+
+        }
+
     }
 }

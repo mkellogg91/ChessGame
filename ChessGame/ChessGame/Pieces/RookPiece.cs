@@ -8,5 +8,23 @@ namespace ChessGame
 {
     class RookPiece : ChessPiece
     {
+        // CONSTRUCTOR
+        public RookPiece()
+        {
+            
+        }
+
+        // PROPERTIES
+
+
+
+        // METHODS
+        public void pieceMove(RookPiece rook)
+        {
+
+        }
+        
+
+
     }
 }

@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    class HorsemanPiece : ChessPiece
+    class Program
     {
 
-        // METHODS
-        public void pieceMove(HorsemanPiece horseman)
+        public Program()
         {
+            main();
+        }
+
+
+        public static void main()
+        {
+
+            newChessGame chessGame = new newChessGame();
 
         }
 
-        public void validateMove(/*move argument*/)
-        {
 
-        }
+
 
     }
 }

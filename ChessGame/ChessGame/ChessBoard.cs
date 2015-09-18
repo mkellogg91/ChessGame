@@ -19,14 +19,24 @@ namespace ChessGame
         public ChessBoard()
         {
 
-            
-
-            List<ChessboardSquare> chessboardSquareList = new List<ChessboardSquare>();
+            ChessboardSquare[,] chessboardSquareArray = new ChessboardSquare[7,7];
+            //List<ChessboardSquare> chessboardSquareList = new List<ChessboardSquare>();
             
             // CREATING 64 CHESSBOARD SQUARES
-            for (int numOfSquares = 1; numOfSquares < 65; numOfSquares++)
+            for (int row = 0; row < 8; row++)
             {
-                chessboardSquareList[numOfSquares] = new ChessboardSquare();
+
+                for (int col = 0; col < 8; col++)
+                {
+
+                    chessboardSquareArray[row, col] = new ChessboardSquare();
+                    
+
+                }
+                    
+
+
+                //put chessboardsqures in 2d array?
 
                 // gives each square its appropriate location
                 // give each square its appropriate color

@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    class KingPiece : ChessPiece
+    class piecesTakenHolder
     {
-
-        // METHODS
-        public void pieceMove(KingPiece king)
-        {
-
-        }
 
     }
 }

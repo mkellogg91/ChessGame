@@ -9,5 +9,12 @@ namespace ChessGame
     class BishopPiece : ChessPiece
     {
 
+
+        // METHODS
+        public void pieceMove(BishopPiece bishop)
+        {
+
+        }
+
     }
 }

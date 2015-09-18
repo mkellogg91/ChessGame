@@ -8,5 +8,8 @@ namespace ChessGame
 {
     class Player
     {
+
+
+
     }
 }
