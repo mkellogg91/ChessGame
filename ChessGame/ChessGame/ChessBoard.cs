@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace ChessGame
         // PROPERTIES
         public Panel chessboardPanel { get; set; }
 
+        public Int16 squareXPos = 10;
+        public Int16 squareYPos = 10;
 
         // CONSTRUCTOR HERE
         public ChessBoard()
@@ -26,21 +29,32 @@ namespace ChessGame
             for (int row = 0; row < 8; row++)
             {
 
+
+
                 for (int col = 0; col < 8; col++)
                 {
 
                     chessboardSquareArray[row, col] = new ChessboardSquare();
-                    
+
+                    // place squares in specific locations
+                    chessboardSquareArray[row, col].squarePictureBox.Location = new Point();
+
+                    // set position value to the elements position property
+                    chessboardSquareArray[row, col].squarePos_x = squareXPos;
+                    chessboardSquareArray[row, col].squarePos_y = squareYPos;
+
+                    // iterate the x position
+                    squareXPos += 100;
+
+
 
                 }
-                    
 
+                // set position value to the elements position property
+                chessboardSquareArray[row, col].squarePos_x = squareXPos;
 
-                //put chessboardsqures in 2d array?
-
-                // gives each square its appropriate location
-                // give each square its appropriate color
-                // 
+                // iterate the y position
+                squareYPos += 100;
                     
             }
 

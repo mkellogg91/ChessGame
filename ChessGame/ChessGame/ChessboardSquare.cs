@@ -21,6 +21,7 @@ namespace ChessGame
         // CHESSBOARD SQUARES WILL HAVE A CHESSPEICE OBJECT
         public ChessPiece squareChessPiece { get; set; }
         public Size pictureBoxSize = new Size(100, 100);
+        Color redColor = Color.FromArgb(255, 0, 0);
 
         // ACTUAL VISUAL REPRESENTATION OF CHESSBOARD SQUARE
         public PictureBox squarePictureBox { get; set; }
@@ -30,6 +31,7 @@ namespace ChessGame
         {
             squarePictureBox = new PictureBox();
             squarePictureBox.Size = pictureBoxSize;
+            squarePictureBox.BackColor = redColor;
 
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    class newChessGame
+    public class newChessGame
     {
 
         public newChessGame()

@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChessGame;
 
 namespace FrontEnd
 {
-    public partial class Form1 : Form
+    public partial class chessForm : Form
     {
-        public Form1()
+        public chessForm()
         {
             InitializeComponent();
+        }
+
+        private void chessForm_Load(object sender, EventArgs e)
+        {
+            newChessGame chessGame = new newChessGame();
         }
     }
 }
