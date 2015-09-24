@@ -19,9 +19,6 @@ namespace FrontEnd
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new chessForm());
 
-
-           
-
         }
     }
 }

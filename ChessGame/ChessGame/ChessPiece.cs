@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace ChessGame
 {
-    class ChessPiece
+    public class ChessPiece
     {
 
         // PROPERTIES

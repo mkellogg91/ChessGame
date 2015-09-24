@@ -9,9 +9,11 @@ namespace ChessGame
     public class newChessGame
     {
 
+        public ChessBoard chessBoard { get; set; }
+
         public newChessGame()
         {
-            ChessBoard chessBoard = new ChessBoard();
+            chessBoard = new ChessBoard();
         }
 
     }

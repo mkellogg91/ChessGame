@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace ChessGame
 {
-    class ChessboardSquare
+    public class ChessboardSquare
     {
 
         // POSITION PROPERTIES
@@ -20,20 +20,48 @@ namespace ChessGame
         public string squareColor { get; set; }
         // CHESSBOARD SQUARES WILL HAVE A CHESSPEICE OBJECT
         public ChessPiece squareChessPiece { get; set; }
-        public Size pictureBoxSize = new Size(100, 100);
-        Color redColor = Color.FromArgb(255, 0, 0);
+        public Size pictureBoxSize { get; set; }
+        public Point point { get; set; }
 
         // ACTUAL VISUAL REPRESENTATION OF CHESSBOARD SQUARE
         public PictureBox squarePictureBox { get; set; }
 
+        //temporary
+        public Button buttonTest { get; set; }
+
         // CONSTRUCTOR
         public ChessboardSquare()
         {
+
             squarePictureBox = new PictureBox();
-            squarePictureBox.Size = pictureBoxSize;
-            squarePictureBox.BackColor = redColor;
+            Initialize(10, 10);
 
         }
+
+        // OVERLOAD CONSTRUCTOR FOR POSITION VALUES
+        public ChessboardSquare(int x, int y)
+        {
+            squarePictureBox = new PictureBox();
+            Initialize(x, y);
+
+        }
+
+        public void Initialize(int x, int y)
+        {
+
+            pictureBoxSize = new Size(100, 100);
+
+            point = new Point(x, y);
+
+            squarePictureBox.Size = pictureBoxSize;
+            squarePictureBox.BackColor = Color.Red;
+
+        }
+
+
+
+
+
 
     }
 }

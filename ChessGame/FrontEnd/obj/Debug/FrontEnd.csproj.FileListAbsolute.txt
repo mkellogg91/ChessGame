@@ -1,1 +1,11 @@
 C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\bin\Debug\FrontEnd.exe.config
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\bin\Debug\FrontEnd.exe
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\bin\Debug\FrontEnd.pdb
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\bin\Debug\ChessGame.dll
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\bin\Debug\ChessGame.pdb
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\obj\Debug\FrontEnd.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\obj\Debug\FrontEnd.chessForm.resources
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\obj\Debug\FrontEnd.Properties.Resources.resources
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\obj\Debug\FrontEnd.csproj.GenerateResource.Cache
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\obj\Debug\FrontEnd.exe
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\FrontEnd\obj\Debug\FrontEnd.pdb

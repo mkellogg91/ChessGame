@@ -21,6 +21,7 @@ namespace FrontEnd
         private void chessForm_Load(object sender, EventArgs e)
         {
             newChessGame chessGame = new newChessGame();
+            
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ChessGame
 {
 
@@ -14,51 +15,60 @@ namespace ChessGame
     {
         // PROPERTIES
         public Panel chessboardPanel { get; set; }
+        public ChessboardSquare[,] chessboardSquareArray = new ChessboardSquare[8,8];
+        
 
-        public Int16 squareXPos = 10;
-        public Int16 squareYPos = 10;
+        private int boardX;
+        private int boardY;
 
         // CONSTRUCTOR HERE
         public ChessBoard()
         {
 
-            ChessboardSquare[,] chessboardSquareArray = new ChessboardSquare[7,7];
-            //List<ChessboardSquare> chessboardSquareList = new List<ChessboardSquare>();
+            chessboardPanel = new Panel();
+            boardX = 10;
+            boardY = 10;
+            boardBuilder(); //sets up the board
             
-            // CREATING 64 CHESSBOARD SQUARES
+
+        } // end constructor
+
+
+        public void boardBuilder()
+        {
+            // CREATING 64 CHESSBOARD SQUARES *****
             for (int row = 0; row < 8; row++)
             {
 
-
+                boardX = 10;
 
                 for (int col = 0; col < 8; col++)
                 {
 
-                    chessboardSquareArray[row, col] = new ChessboardSquare();
+                    chessboardSquareArray[row, col] = new ChessboardSquare(boardX, boardY);
 
-                    // place squares in specific locations
-                    chessboardSquareArray[row, col].squarePictureBox.Location = new Point();
+                    // give the picturebox a location
+                    chessboardSquareArray[row, col].squarePictureBox.Location = chessboardSquareArray[row, col].point;
 
-                    // set position value to the elements position property
-                    chessboardSquareArray[row, col].squarePos_x = squareXPos;
-                    chessboardSquareArray[row, col].squarePos_y = squareYPos;
+                    // add picturebox to the chessboard panel
+                    chessboardPanel.Controls.Add(chessboardSquareArray[row, col].squarePictureBox);
+
+                    
 
                     // iterate the x position
-                    squareXPos += 100;
+                    boardX += 100;
 
+                } // end inner loop
 
-
-                }
-
-                // set position value to the elements position property
-                chessboardSquareArray[row, col].squarePos_x = squareXPos;
 
                 // iterate the y position
-                squareYPos += 100;
-                    
-            }
+                boardY += 100;
 
-        } // end constructor
+            } // end outer loop
+
+            
+
+        } // end board builder
         
 
 
