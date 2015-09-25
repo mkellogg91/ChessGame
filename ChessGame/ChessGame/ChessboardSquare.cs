@@ -54,8 +54,8 @@ namespace ChessGame
             point = new Point(x, y);
 
             squarePictureBox.Size = pictureBoxSize;
-            squarePictureBox.BackColor = Color.Red;
-
+            squarePictureBox.BackColor = Color.White;
+            squarePictureBox.BorderStyle = BorderStyle.FixedSingle;
         }
 
 

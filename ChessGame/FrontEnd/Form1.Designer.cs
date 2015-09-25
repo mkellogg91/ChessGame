@@ -34,10 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 552);
+            this.ClientSize = new System.Drawing.Size(1000, 900);
             this.Name = "chessForm";
             this.Text = "Chess Game";
-            this.Load += new System.EventHandler(this.chessForm_Load);
             this.ResumeLayout(false);
 
         }

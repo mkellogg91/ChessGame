@@ -26,6 +26,7 @@ namespace ChessGame
         {
 
             chessboardPanel = new Panel();
+            chessboardPanel.BackColor = Color.Beige;
             boardX = 10;
             boardY = 10;
             boardBuilder(); //sets up the board
@@ -36,6 +37,9 @@ namespace ChessGame
 
         public void boardBuilder()
         {
+
+            int colorAlternator = 0;
+
             // CREATING 64 CHESSBOARD SQUARES *****
             for (int row = 0; row < 8; row++)
             {
@@ -46,6 +50,36 @@ namespace ChessGame
                 {
 
                     chessboardSquareArray[row, col] = new ChessboardSquare(boardX, boardY);
+
+                    if(colorAlternator == 0)
+                    {
+                        
+                        //give the picturebox a color
+                        chessboardSquareArray[row, col].squarePictureBox.BackColor = Color.White;
+                        if(col == 7)
+                        {
+                            colorAlternator = 0;
+                        }
+                        else
+                        {
+                            colorAlternator = 1;
+                        }
+                        
+                    }
+                    else
+                    {
+                        chessboardSquareArray[row, col].squarePictureBox.BackColor = Color.Black;
+
+                        if (col == 7)
+                        {
+                            colorAlternator = 1;
+                        }
+                        else
+                        {
+                            colorAlternator = 0;
+                        }
+                       
+                    }
 
                     // give the picturebox a location
                     chessboardSquareArray[row, col].squarePictureBox.Location = chessboardSquareArray[row, col].point;

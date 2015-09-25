@@ -13,15 +13,19 @@ namespace FrontEnd
 {
     public partial class chessForm : Form
     {
+
+        public newChessGame formChessGame { get; set; }
+
         public chessForm()
         {
             InitializeComponent();
+            chessForm_Load();
         }
 
-        private void chessForm_Load(object sender, EventArgs e)
+        private void chessForm_Load()
         {
-            newChessGame chessGame = new newChessGame();
-            
+
+            formChessGame = new newChessGame();
         }
     }
 }
