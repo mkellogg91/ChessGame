@@ -101,9 +101,22 @@ namespace ChessGame
             } // end outer loop
 
             
+            // place pieces on board
+            
+
+
+
 
         } // end board builder
-        
+
+
+        public void placePiece(int col, int row, ChessPiece chessPiece)
+        {
+
+            // set square's image box = chessPiece's image
+            chessboardSquareArray[col, row].squarePictureBox.Image = chessPiece.chesspieceImage;
+        }
+
 
 
     }

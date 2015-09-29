@@ -14,15 +14,13 @@ namespace ChessGame
         // PROPERTIES
 
         public Image chesspieceImage { get; set; }
-        public string pieceColor { get; set; }
+        public int pieceColor { get; set; }         // 0 = WHITE    1 = BLACK
 
         
-        
-
-        // CONSTRUCTOR!!!
-        public ChessPiece()
+        // CONSTRUCTOR!!!           TAKES A COLOR PARAMETER
+        public ChessPiece(int color)
         {
-
+            pieceColor = color;
         }
 
         // METHODS
@@ -32,6 +30,9 @@ namespace ChessGame
         {
 
         }
+
+
+        
 
     }
 }

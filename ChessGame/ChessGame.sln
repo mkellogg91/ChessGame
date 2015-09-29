@@ -7,6 +7,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessGame", "ChessGame\Ches
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{054C6D80-C88B-4EF5-B3BE-8B5DB7DFDB95}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{A7D91730-3344-4E3C-B720-AE0CD2D4962A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Pictures\chess_pieces\black_bishop.PNG = ..\..\..\..\Pictures\chess_pieces\black_bishop.PNG
+		..\..\..\..\Pictures\chess_pieces\black_horse.PNG = ..\..\..\..\Pictures\chess_pieces\black_horse.PNG
+		..\..\..\..\Pictures\chess_pieces\black_king.PNG = ..\..\..\..\Pictures\chess_pieces\black_king.PNG
+		..\..\..\..\Pictures\chess_pieces\black_pawn.PNG = ..\..\..\..\Pictures\chess_pieces\black_pawn.PNG
+		..\..\..\..\Pictures\chess_pieces\black_queen.PNG = ..\..\..\..\Pictures\chess_pieces\black_queen.PNG
+		..\..\..\..\Pictures\chess_pieces\black_rook.PNG = ..\..\..\..\Pictures\chess_pieces\black_rook.PNG
+		..\..\..\..\Pictures\chess_pieces\white_bishop.PNG = ..\..\..\..\Pictures\chess_pieces\white_bishop.PNG
+		..\..\..\..\Pictures\chess_pieces\white_horse.PNG = ..\..\..\..\Pictures\chess_pieces\white_horse.PNG
+		..\..\..\..\Pictures\chess_pieces\white_king.PNG = ..\..\..\..\Pictures\chess_pieces\white_king.PNG
+		..\..\..\..\Pictures\chess_pieces\white_pawn.PNG = ..\..\..\..\Pictures\chess_pieces\white_pawn.PNG
+		..\..\..\..\Pictures\chess_pieces\white_queen.PNG = ..\..\..\..\Pictures\chess_pieces\white_queen.PNG
+		..\..\..\..\Pictures\chess_pieces\white_rook.PNG = ..\..\..\..\Pictures\chess_pieces\white_rook.PNG
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
