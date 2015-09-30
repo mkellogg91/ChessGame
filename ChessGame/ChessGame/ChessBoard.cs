@@ -16,23 +16,106 @@ namespace ChessGame
         // PROPERTIES
         public Panel chessboardPanel { get; set; }
         public ChessboardSquare[,] chessboardSquareArray = new ChessboardSquare[8,8];
-        
+        public List<ChessPiece>whitePieces { get; set; }
+        public List<ChessPiece> blackPieces { get; set; }
 
         private int boardX;
         private int boardY;
 
+        //chesspiece declaration
+        //public KingPiece whiteKing;
+        //public QueenPiece whiteQueen;
+        //public BishopPiece whiteBishop1;
+        //public BishopPiece whiteBishop2;
+        //public HorsemanPiece whiteHorseman1;
+        //public HorsemanPiece whiteHorseman2;
+        //public RookPiece whiteRook1;
+        //public RookPiece whiteRook2;
+        //public PawnPiece whitePawn1;
+        //public PawnPiece whitePawn2;
+        //public PawnPiece whitePawn3;
+        //public PawnPiece whitePawn4;
+        //public PawnPiece whitePawn5;
+        //public PawnPiece whitePawn6;
+        //public PawnPiece whitePawn7;
+        //public PawnPiece whitePawn8;
+
+        //public KingPiece blackKing;
+        //public QueenPiece blackQueen;
+        //public BishopPiece blackBishop1;
+        //public BishopPiece blackBishop2;
+        //public HorsemanPiece blackHorseman1;
+        //public HorsemanPiece blackHorseman2;
+        //public RookPiece blackRook1;
+        //public RookPiece blackRook2;
+        //public PawnPiece blackPawn1;
+        //public PawnPiece blackPawn2;
+        //public PawnPiece blackPawn3;
+        //public PawnPiece blackPawn4;
+        //public PawnPiece blackPawn5;
+        //public PawnPiece blackPawn6;
+        //public PawnPiece blackPawn7;
+        //public PawnPiece blackPawn8;
+
         // CONSTRUCTOR HERE
         public ChessBoard()
         {
+            initialize();
 
             chessboardPanel = new Panel();
             chessboardPanel.BackColor = Color.Beige;
             boardX = 10;
             boardY = 10;
+
             boardBuilder(); //sets up the board
+            
             
 
         } // end constructor
+
+        public void initialize()
+        {
+                // lists of black and white pieces
+            whitePieces = new List<ChessPiece>();
+            blackPieces = new List<ChessPiece>();
+
+
+            whitePieces.Add(new KingPiece(0));
+            whitePieces.Add (new QueenPiece(0));
+            whitePieces.Add (new BishopPiece(0));
+            whitePieces.Add (new BishopPiece(0));
+            whitePieces.Add (new HorsemanPiece(0));
+            whitePieces.Add (new HorsemanPiece(0));
+            whitePieces.Add (new RookPiece(0));
+            whitePieces.Add (new RookPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+            whitePieces.Add (new PawnPiece(0));
+
+
+            blackPieces.Add(new KingPiece(0));
+            blackPieces.Add(new QueenPiece(0));
+            blackPieces.Add(new BishopPiece(0));
+            blackPieces.Add(new BishopPiece(0));
+            blackPieces.Add(new HorsemanPiece(0));
+            blackPieces.Add(new HorsemanPiece(0));
+            blackPieces.Add(new RookPiece(0));
+            blackPieces.Add(new RookPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new PawnPiece(0));
+
+        }
 
 
         public void boardBuilder()
@@ -100,9 +183,9 @@ namespace ChessGame
 
             } // end outer loop
 
-            
+
             // place pieces on board
-            
+            placePiece(4, 7, whitePieces[0]);
 
 
 
@@ -115,6 +198,8 @@ namespace ChessGame
 
             // set square's image box = chessPiece's image
             chessboardSquareArray[col, row].squarePictureBox.Image = chessPiece.chesspieceImage;
+            chessboardSquareArray[col, row].squareChessPiece = chessPiece;
+
         }
 
 

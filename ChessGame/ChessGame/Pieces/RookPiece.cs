@@ -7,19 +7,19 @@ using System.Drawing;
 
 namespace ChessGame
 {
-    class RookPiece : ChessPiece
+    public class RookPiece : ChessPiece
     {
         // CONSTRUCTOR
         public RookPiece(int color) : base(color)
         {
             //DETERMINE PIECE IMAGE
-            if (pieceColor == '0')   // IF WHITE PIECE
+            if (pieceColor == 0)   // IF WHITE PIECE
             {
-                chesspieceImage = Image.FromFile("../Images/white_bishop.PNG");
+                chesspieceImage = Image.FromFile("../Images/white_rook.PNG");
             }
             else   // ELSE BLACK PIECE
             {
-                chesspieceImage = Image.FromFile("../Images/black_bishop.PNG");
+                chesspieceImage = Image.FromFile("../Images/black_rook.PNG");
             }
         }
 

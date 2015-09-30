@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace ChessGame
 {
-    class BishopPiece : ChessPiece
+    public class BishopPiece : ChessPiece
     {
 
         // CONSTRUCTOR
@@ -17,7 +17,7 @@ namespace ChessGame
 
 
                 //DETERMINE PIECE IMAGE
-            if (pieceColor == '0')   // IF WHITE PIECE
+            if (pieceColor == 0)   // IF WHITE PIECE
             {
                 chesspieceImage = Image.FromFile("../Images/white_bishop.PNG");
             }
