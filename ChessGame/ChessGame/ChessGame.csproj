@@ -56,6 +56,31 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pieces\QueenPiece.cs" />
     <Compile Include="Pieces\RookPiece.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="piece_images\black_bishop.PNG" />
+    <Content Include="piece_images\black_horse.PNG" />
+    <Content Include="piece_images\black_king.PNG" />
+    <Content Include="piece_images\black_pawn.PNG" />
+    <Content Include="piece_images\black_queen.PNG" />
+    <Content Include="piece_images\black_rook.PNG" />
+    <Content Include="piece_images\white_bishop.PNG" />
+    <Content Include="piece_images\white_horse.PNG" />
+    <Content Include="piece_images\white_king.PNG" />
+    <Content Include="piece_images\white_pawn.PNG" />
+    <Content Include="piece_images\white_queen.PNG" />
+    <Content Include="piece_images\white_rook.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -16,11 +16,14 @@ namespace ChessGame
             //DETERMINE PIECE IMAGE
             if (pieceColor == 0)   // IF WHITE PIECE
             {
-                chesspieceImage = Image.FromFile("../Images/white_queen.PNG");
+                chesspieceImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("white_queen");
+                //chesspieceImage = Image.FromFile("../Images/white_queen.PNG");
+
             }
             else   // ELSE BLACK PIECE
             {
-                chesspieceImage = Image.FromFile("../Images/black_queen.PNG");
+                chesspieceImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("black_queen");
+                //chesspieceImage = Image.FromFile("../Images/black_queen.PNG");
             }
         }
 

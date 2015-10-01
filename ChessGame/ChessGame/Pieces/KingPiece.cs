@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Reflection;
 
 namespace ChessGame
 {
@@ -16,13 +17,14 @@ namespace ChessGame
             //DETERMINE PIECE IMAGE
             if (pieceColor == 0)   // IF WHITE PIECE
             {
-                string test = Environment.CurrentDirectory;
-                chesspieceImage = Image.FromFile(@"C:\Users\Mike\Pictures\chess_pieces\white_king.PNG");
-                
+                //chesspieceImage = Image.FromFile(@"~../Images/black_king.PNG");
+                chesspieceImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("white_king");
+
             }
             else   // ELSE BLACK PIECE
             {
-                chesspieceImage = Image.FromFile(@"../Images/black_king.PNG");
+                chesspieceImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("black_king");
+                //chesspieceImage = Image.FromFile(@"~../Images/black_king.PNG");
             }
         }
 

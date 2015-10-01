@@ -3,3 +3,5 @@ C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\ChessGame\bin\Debug\ChessGame
 C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\ChessGame\obj\Debug\ChessGame.csprojResolveAssemblyReference.cache
 C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\ChessGame\obj\Debug\ChessGame.dll
 C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\ChessGame\obj\Debug\ChessGame.pdb
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\ChessGame\obj\Debug\ChessGame.Properties.Resources.resources
+C:\Users\Mike\Documents\GitHub\ChessGame\ChessGame\ChessGame\obj\Debug\ChessGame.csproj.GenerateResource.Cache

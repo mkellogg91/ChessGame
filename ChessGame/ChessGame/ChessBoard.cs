@@ -98,22 +98,22 @@ namespace ChessGame
             whitePieces.Add (new PawnPiece(0));
 
 
-            blackPieces.Add(new KingPiece(0));
-            blackPieces.Add(new QueenPiece(0));
-            blackPieces.Add(new BishopPiece(0));
-            blackPieces.Add(new BishopPiece(0));
-            blackPieces.Add(new HorsemanPiece(0));
-            blackPieces.Add(new HorsemanPiece(0));
-            blackPieces.Add(new RookPiece(0));
-            blackPieces.Add(new RookPiece(0));
-            blackPieces.Add(new PawnPiece(0));
-            blackPieces.Add(new PawnPiece(0));
-            blackPieces.Add(new PawnPiece(0));
-            blackPieces.Add(new PawnPiece(0));
-            blackPieces.Add(new PawnPiece(0));
-            blackPieces.Add(new PawnPiece(0));
-            blackPieces.Add(new PawnPiece(0));
-            blackPieces.Add(new PawnPiece(0));
+            blackPieces.Add(new KingPiece(1));
+            blackPieces.Add(new QueenPiece(1));
+            blackPieces.Add(new BishopPiece(1));
+            blackPieces.Add(new BishopPiece(1));
+            blackPieces.Add(new HorsemanPiece(1));
+            blackPieces.Add(new HorsemanPiece(1));
+            blackPieces.Add(new RookPiece(1));
+            blackPieces.Add(new RookPiece(1));
+            blackPieces.Add(new PawnPiece(1));
+            blackPieces.Add(new PawnPiece(1));
+            blackPieces.Add(new PawnPiece(1));
+            blackPieces.Add(new PawnPiece(1));
+            blackPieces.Add(new PawnPiece(1));
+            blackPieces.Add(new PawnPiece(1));
+            blackPieces.Add(new PawnPiece(1));
+            blackPieces.Add(new PawnPiece(1));
 
         }
 
@@ -184,9 +184,41 @@ namespace ChessGame
             } // end outer loop
 
 
-            // place pieces on board
-            placePiece(4, 7, whitePieces[0]);
+            // place white pieces on board
+            placePiece(7, 0, whitePieces[6]); //rook
+            placePiece(7, 1, whitePieces[4]); //horse
+            placePiece(7, 2, whitePieces[2]); //bishop
+            placePiece(7, 3, whitePieces[1]); //queen
+            placePiece(7, 4, whitePieces[0]); //king
+            placePiece(7, 5, whitePieces[3]); //bishop
+            placePiece(7, 6, whitePieces[5]); //horse
+            placePiece(7, 7, whitePieces[7]); //rook
+            placePiece(6, 0, whitePieces[8]); //pawn
+            placePiece(6, 1, whitePieces[9]); //pawn
+            placePiece(6, 2, whitePieces[10]); //pawn
+            placePiece(6, 3, whitePieces[11]); //pawn
+            placePiece(6, 4, whitePieces[12]); //pawn
+            placePiece(6, 5, whitePieces[13]); //pawn
+            placePiece(6, 6, whitePieces[14]); //pawn
+            placePiece(6, 7, whitePieces[15]); //pawn
 
+            // place black pieces on board
+            placePiece(0, 0, blackPieces[6]); //rook
+            placePiece(0, 1, blackPieces[4]); //horse
+            placePiece(0, 2, blackPieces[2]); //bishop
+            placePiece(0, 3, blackPieces[1]); //queen
+            placePiece(0, 4, blackPieces[0]); //king
+            placePiece(0, 5, blackPieces[3]); //bishop
+            placePiece(0, 6, blackPieces[5]); //horse
+            placePiece(0, 7, blackPieces[7]); //rook
+            placePiece(1, 0, blackPieces[8]); //pawn
+            placePiece(1, 1, blackPieces[9]); //pawn
+            placePiece(1, 2, blackPieces[10]); //pawn
+            placePiece(1, 3, blackPieces[11]); //pawn
+            placePiece(1, 4, blackPieces[12]); //pawn
+            placePiece(1, 5, blackPieces[13]); //pawn
+            placePiece(1, 6, blackPieces[14]); //pawn
+            placePiece(1, 7, blackPieces[15]); //pawn
 
 
 
