@@ -222,14 +222,19 @@ namespace ChessGame
 
 
 
-        } // end board builder
 
+    } // end board builder
+
+        
 
         public void placePiece(int col, int row, ChessPiece chessPiece)
         {
 
-            // set square's image box = chessPiece's image
+                // set square's image box = chessPiece's image
             chessboardSquareArray[col, row].squarePictureBox.Image = chessPiece.chesspieceImage;
+                //center image in picturebox
+            chessboardSquareArray[col, row].squarePictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                //set Square's chessPiece property to the passed in chessPiece
             chessboardSquareArray[col, row].squareChessPiece = chessPiece;
 
         }

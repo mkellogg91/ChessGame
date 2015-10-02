@@ -22,6 +22,7 @@ namespace ChessGame
         public ChessPiece squareChessPiece { get; set; }
         public Size pictureBoxSize { get; set; }
         public Point point { get; set; }
+        
 
         // ACTUAL VISUAL REPRESENTATION OF CHESSBOARD SQUARE
         public PictureBox squarePictureBox { get; set; }
