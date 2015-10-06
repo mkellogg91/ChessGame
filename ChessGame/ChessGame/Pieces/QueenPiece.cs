@@ -29,7 +29,12 @@ namespace ChessGame
 
 
         // METHODS
-        public void pieceMove(QueenPiece queen)
+        public void pieceMove(ChessboardSquare previousChessSquare, ChessboardSquare newChessSquare)
+        {
+
+        }
+            // displays potential moves
+        public void displayPotentialMove(ChessboardSquare chessSquare)
         {
 
         }

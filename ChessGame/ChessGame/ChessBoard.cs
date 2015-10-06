@@ -133,8 +133,12 @@ namespace ChessGame
                 {
 
                     chessboardSquareArray[row, col] = new ChessboardSquare(boardX, boardY);
+                        
+                        //setting the square's location values
+                    chessboardSquareArray[row, col].squareArrayRow = row;
+                    chessboardSquareArray[row, col].squareArrayCol = col;
 
-                    if(colorAlternator == 0)
+                    if (colorAlternator == 0)
                     {
                         
                         //give the picturebox a color

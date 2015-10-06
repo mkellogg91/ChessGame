@@ -28,12 +28,12 @@ namespace ChessGame
 
 
         // METHODS
-        public void pieceMove(HorsemanPiece horseman)
+        public void pieceMove(ChessboardSquare previousChessSquare, ChessboardSquare newChessSquare)
         {
 
         }
-
-        public void validateMove(/*move argument*/)
+            // displays potential moves
+        public void displayPotentialMove(ChessboardSquare chessSquare)
         {
 
         }
