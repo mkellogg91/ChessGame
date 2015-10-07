@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using ChessGame;
 
 namespace ChessGame
 {
@@ -37,6 +38,50 @@ namespace ChessGame
         {
 
         }
+
+        public bool validateMove(ChessboardSquare movingFromChessSquare, ChessboardSquare movingToChessSquare)
+        {
+            isValidMove = false;
+
+            //if chesspiece.color == white
+            if(movingFromChessSquare.squareChessPiece.pieceColor == 0)
+            {
+                bool enemyPieceDiagonal = false;
+
+                //if enemypiece diagonal
+                //if(chessboard.chessboardsquareArray)
+
+                //if square.squareArrayRow, square.squareArrowCol within movable area
+                
+                    //set isValidMove = true
+
+                //else 
+                    //do nothing
+
+
+            }
+
+
+
+
+            //else if chesspiece.color == black
+            else
+            {
+
+                //if square.squareArrayRow, square.squareArrowCol within movable area
+                //set isValidMove = true
+
+                //else 
+                //do nothing
+
+            }
+
+
+
+            return isValidMove;
+            
+        }
+
 
     }
 }

@@ -15,7 +15,7 @@ namespace ChessGame
 
         public Image chesspieceImage { get; set; }
         public int pieceColor { get; set; }         // 0 = WHITE    1 = BLACK
-
+        public bool isValidMove { get; set; }
         
         // CONSTRUCTOR!!!           TAKES A COLOR PARAMETER
         public ChessPiece(int color)
