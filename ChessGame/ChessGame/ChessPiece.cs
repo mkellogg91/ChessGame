@@ -25,14 +25,94 @@ namespace ChessGame
 
         // METHODS
 
-            // set up a piece move property
-        public void pieceMove(ChessPiece piece)
+        public Point upDiagLeftMove(Point startingPoint, int numberOfRuns)
         {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X -= 1;
+                startingPoint.Y -= 1;
+
+            }
+            return startingPoint;
+
+        }
+
+        public Point upMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X -= 1;
+            }
+            return startingPoint;
+
+        }
+
+        public Point upDiagRightMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X -= 1;
+                startingPoint.Y += 1;
+            }
+            return startingPoint;
+
+        }
+
+        public Point leftMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.Y -= 1;
+            }
+            return startingPoint;
+
+        }
+
+        public Point rightMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.Y += 1;
+            }
+            return startingPoint;
+
+        }
+
+        public Point downDiagLeftMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X += 1;
+                startingPoint.Y -= 1;
+            }
+            return startingPoint;
+
+        }
+
+        public Point downMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X += 1;
+            }
+            return startingPoint;
+
+        }
+
+        public Point downDiagRightMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X += 1;
+                startingPoint.Y += 1;
+            }
+            return startingPoint;
 
         }
 
 
-        
+
+
 
     }
 }

@@ -244,6 +244,49 @@ namespace ChessGame
         }
 
 
+        public bool validateMove(ChessboardSquare movingFromChessSquare, ChessboardSquare movingToChessSquare)
+        {
+
+            // variables
+            bool isValidMove = false;
+            bool enemyPieceDiagonal = false;
+
+
+            //if chess piece is white
+            if (movingFromChessSquare.squareChessPiece.pieceColor == 0)
+            {
+                
+                
+
+                //if enemypiece diagonal
+                
+
+                //if square.squareArrayRow, square.squareArrowCol within movable area
+
+                    //set isValidMove = true
+
+                //else 
+                    //do nothing
+
+
+            }
+
+            //if chess piece is black
+            else
+            {
+
+                //if square.squareArrayRow, square.squareArrowCol within movable area
+                //set isValidMove = true
+
+                //else 
+                //do nothing
+
+            }
+
+            return isValidMove;
+
+        }
+
 
     }
 }

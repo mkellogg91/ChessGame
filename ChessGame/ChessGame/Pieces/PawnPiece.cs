@@ -34,53 +34,63 @@ namespace ChessGame
 
         }
             // displays potential moves
-        public void displayPotentialMove(ChessboardSquare chessSquare)
+        public void displayPotentialMoves(ChessboardSquare chessSquare)
         {
 
         }
 
-        public bool validateMove(ChessboardSquare movingFromChessSquare, ChessboardSquare movingToChessSquare)
+
+        public List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
         {
-            isValidMove = false;
 
-            //if chesspiece.color == white
-            if(movingFromChessSquare.squareChessPiece.pieceColor == 0)
+            List<Point> potentialMoveList = new List<Point>();
+
+            Point movePoint;
+
+            //if piece is white
+            if(chessSquare.squareChessPiece.pieceColor == 0)
             {
-                bool enemyPieceDiagonal = false;
+                //add diaglmove
+                movePoint = upDiagLeftMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
+                potentialMoveList.Add(movePoint);
 
-                //if enemypiece diagonal
-                //if(chessboard.chessboardsquareArray)
+                //add upmove
+                movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
+                potentialMoveList.Add(movePoint);
 
-                //if square.squareArrayRow, square.squareArrowCol within movable area
-                
-                    //set isValidMove = true
-
-                //else 
-                    //do nothing
-
+                //add diagrmove
+                movePoint = upDiagRightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
+                potentialMoveList.Add(movePoint);
 
             }
-
-
-
-
-            //else if chesspiece.color == black
+            //if piece is black
             else
             {
 
-                //if square.squareArrayRow, square.squareArrowCol within movable area
-                //set isValidMove = true
+                //add diaglmove
+                movePoint = downDiagLeftMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
+                potentialMoveList.Add(movePoint);
 
-                //else 
-                //do nothing
+                //add downmove
+                movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
+                potentialMoveList.Add(movePoint);
+
+                //add diagrmove
+                movePoint = downDiagRightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
+                potentialMoveList.Add(movePoint);
+
 
             }
 
-
-
-            return isValidMove;
-            
+            return potentialMoveList;
+                    
         }
+       
+
+
+
+
+            
 
 
     }
