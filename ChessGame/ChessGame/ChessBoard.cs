@@ -256,7 +256,7 @@ namespace ChessGame
             if (movingFromChessSquare.squareChessPiece.pieceColor == 0)
             {
                 
-                
+                //**** use a foreach loop to check each potential move added to the list ****
 
                 //if enemypiece diagonal
                 

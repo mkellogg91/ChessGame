@@ -33,11 +33,55 @@ namespace ChessGame
         {
 
         }
-            // displays potential moves
-        public void displayPotentialMove(ChessboardSquare chessSquare)
+
+
+        public List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
         {
 
+            List<Point> potentialMoveList = new List<Point>();
+
+            Point movePoint;
+
+            //will never have to move more than 8 spaces
+            for (int iterator = 1; iterator < 8; iterator++)
+            {
+                //add updiaglmove
+                movePoint = upDiagLeftMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+
+                //add upmove
+                movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+
+                //add updiagrmove
+                movePoint = upDiagRightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+
+                //add leftmove
+                movePoint = leftMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+
+                //add rightmove
+                movePoint = rightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+
+                //add downdiaglmove
+                movePoint = downDiagLeftMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+
+                //add downmove
+                movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+
+                //add downdiagrmove
+                movePoint = downDiagRightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
+                potentialMoveList.Add(movePoint);
+            }
+
+            return potentialMoveList;
+
         }
+
 
     }
 }

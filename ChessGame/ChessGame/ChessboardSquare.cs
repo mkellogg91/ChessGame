@@ -73,6 +73,9 @@ namespace ChessGame
         void pictureBox_Clicked(object sender, EventArgs e)
         {
             
+            
+
+
             //if 1st time clicking this square or if it is outside move range
             
                 //if piece == null and not in move range

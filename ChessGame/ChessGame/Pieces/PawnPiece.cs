@@ -33,11 +33,6 @@ namespace ChessGame
         {
 
         }
-            // displays potential moves
-        public void displayPotentialMoves(ChessboardSquare chessSquare)
-        {
-
-        }
 
 
         public List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
@@ -58,6 +53,10 @@ namespace ChessGame
                 movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
                 potentialMoveList.Add(movePoint);
 
+                //add upmove 2x
+                movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 2);
+                potentialMoveList.Add(movePoint);
+
                 //add diagrmove
                 movePoint = upDiagRightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
                 potentialMoveList.Add(movePoint);
@@ -73,6 +72,10 @@ namespace ChessGame
 
                 //add downmove
                 movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
+                potentialMoveList.Add(movePoint);
+
+                //add downmove 2x
+                movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 2);
                 potentialMoveList.Add(movePoint);
 
                 //add diagrmove
