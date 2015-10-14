@@ -34,7 +34,7 @@ namespace ChessGame
         }
 
 
-        public List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
+        public override List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
         {
 
             List<Point> potentialMoveList = new List<Point>();

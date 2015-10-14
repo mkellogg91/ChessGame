@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Diagnostics;
 
 namespace ChessGame
 {
@@ -18,6 +18,7 @@ namespace ChessGame
         public ChessboardSquare[,] chessboardSquareArray = new ChessboardSquare[8,8];
         public List<ChessPiece>whitePieces { get; set; }
         public List<ChessPiece> blackPieces { get; set; }
+        private List<Point> currentPotentialMoves;
 
         private int boardX;
         private int boardY;
@@ -229,7 +230,47 @@ namespace ChessGame
 
     } // end board builder
 
-        
+        void pictureBox_Clicked(object sender, EventArgs e)
+        {
+
+            ChessboardSquare theSender = ((ChessboardSquare)sender);
+
+            //if 1st time clicking this square or if it is outside move range
+
+
+
+            //if piece == null and not in move range
+            //don't do anything 
+
+            //if first time getting clicked -> display potential moves
+
+             currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
+
+            //now that we have all potential moves let's eliminate moves that are prohibited for various reasons such as: other pieces blocking, king in check
+                //eg: pawnpiece that doesn't have an enemy piece diagonally cannot move diagonnally
+            //check board for exceptions
+
+
+            //else if 2nd time getting clicked
+            //if in moving range for that piece
+            //move piece 
+
+            //else if not in moving range for that piece
+            //
+
+            //display potential moves
+            //hilight squares where user could move piece
+
+
+            //this.squareChessPiece.
+
+
+
+            Debug.WriteLine(((ChessboardSquare)sender).squareArrayRow.ToString() + "," + ((ChessboardSquare)sender).squareArrayCol.ToString());
+
+        } //end picturebox clicked event
+
+
 
         public void placePiece(int col, int row, ChessPiece chessPiece)
         {
@@ -255,17 +296,23 @@ namespace ChessGame
             //if chess piece is white
             if (movingFromChessSquare.squareChessPiece.pieceColor == 0)
             {
-                
+
+
+
                 //**** use a foreach loop to check each potential move added to the list ****
+                foreach()
+                {
+
+                }
 
                 //if enemypiece diagonal
-                
 
-                //if square.squareArrayRow, square.squareArrowCol within movable area
+
+                    //if square.squareArrayRow, square.squareArrowCol within movable area
 
                     //set isValidMove = true
 
-                //else 
+                    //else 
                     //do nothing
 
 
