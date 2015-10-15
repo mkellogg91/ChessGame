@@ -9,7 +9,7 @@ using System.Drawing;
 
 namespace ChessGame
 {
-    public class ChessboardSquare
+    public class ChessboardSquare : PictureBox
     {
 
         // POSITION PROPERTIES
@@ -25,13 +25,6 @@ namespace ChessGame
         public Point point { get; set; }
 
 
-        // ACTUAL VISUAL REPRESENTATION OF CHESSBOARD SQUARE
-        public PictureBox squarePictureBox { get; set; }
-
-        //temporary
-        public Button buttonTest { get; set; }
-
-
         
         //picOneFaceUpA.MouseClick += new MouseEventHandler(your_event_handler);
 
@@ -39,16 +32,14 @@ namespace ChessGame
         public ChessboardSquare()
         {
 
-            squarePictureBox = new PictureBox();
             Initialize(10, 10);
             
-
         }
 
         // OVERLOAD CONSTRUCTOR FOR POSITION VALUES
         public ChessboardSquare(int x, int y)
         {
-            squarePictureBox = new PictureBox();
+            
             Initialize(x, y);
 
         }
@@ -60,18 +51,11 @@ namespace ChessGame
 
             point = new Point(x, y);
 
-            squarePictureBox.Size = pictureBoxSize;
-            squarePictureBox.BackColor = Color.White;
-            squarePictureBox.BorderStyle = BorderStyle.FixedSingle;
+            this.Size = pictureBoxSize;
+            this.BackColor = Color.White;
+            this.BorderStyle = BorderStyle.FixedSingle;
 
-                //ADD EVENT HANDLER FOR EACH SQUARE
-            this.squarePictureBox.MouseClick += new MouseEventHandler(ChessBoard.pictureBox_Clicked);
-            
         }
-
-                //ADD CODE WHEN SQUARE CLICKED
-        
-
 
 
     }

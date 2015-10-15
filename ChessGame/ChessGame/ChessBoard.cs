@@ -143,7 +143,7 @@ namespace ChessGame
                     {
                         
                         //give the picturebox a color
-                        chessboardSquareArray[row, col].squarePictureBox.BackColor = Color.White;
+                        chessboardSquareArray[row, col].BackColor = Color.White;
                         if(col == 7)
                         {
                             colorAlternator = 0;
@@ -156,7 +156,7 @@ namespace ChessGame
                     }
                     else
                     {
-                        chessboardSquareArray[row, col].squarePictureBox.BackColor = Color.Black;
+                        chessboardSquareArray[row, col].BackColor = Color.Black;
 
                         if (col == 7)
                         {
@@ -170,12 +170,14 @@ namespace ChessGame
                     }
 
                     // give the picturebox a location
-                    chessboardSquareArray[row, col].squarePictureBox.Location = chessboardSquareArray[row, col].point;
+                    chessboardSquareArray[row, col].Location = chessboardSquareArray[row, col].point;
 
                     // add picturebox to the chessboard panel
-                    chessboardPanel.Controls.Add(chessboardSquareArray[row, col].squarePictureBox);
+                    chessboardPanel.Controls.Add(chessboardSquareArray[row, col]);
 
-                    
+                    // subscribe to action listener
+
+                    chessboardSquareArray[row, col].MouseClick += new MouseEventHandler(this.pictureBox_Clicked);
 
                     // iterate the x position
                     boardX += 100;
@@ -235,16 +237,16 @@ namespace ChessGame
 
             ChessboardSquare theSender = ((ChessboardSquare)sender);
 
+            currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
+            
             //if 1st time clicking this square or if it is outside move range
-
-
 
             //if piece == null and not in move range
             //don't do anything 
 
             //if first time getting clicked -> display potential moves
 
-             currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
+                //currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
 
             //now that we have all potential moves let's eliminate moves that are prohibited for various reasons such as: other pieces blocking, king in check
                 //eg: pawnpiece that doesn't have an enemy piece diagonally cannot move diagonnally
@@ -266,7 +268,7 @@ namespace ChessGame
 
 
 
-            Debug.WriteLine(((ChessboardSquare)sender).squareArrayRow.ToString() + "," + ((ChessboardSquare)sender).squareArrayCol.ToString());
+            Debug.WriteLine(theSender.squareArrayRow.ToString() + "," + theSender.squareArrayCol.ToString());
 
         } //end picturebox clicked event
 
@@ -276,62 +278,55 @@ namespace ChessGame
         {
 
                 // set square's image box = chessPiece's image
-            chessboardSquareArray[col, row].squarePictureBox.Image = chessPiece.chesspieceImage;
+            chessboardSquareArray[col, row].Image = chessPiece.chesspieceImage;
                 //center image in picturebox
-            chessboardSquareArray[col, row].squarePictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+            chessboardSquareArray[col, row].SizeMode = PictureBoxSizeMode.CenterImage;
                 //set Square's chessPiece property to the passed in chessPiece
             chessboardSquareArray[col, row].squareChessPiece = chessPiece;
 
         }
 
 
-        public bool validateMove(ChessboardSquare movingFromChessSquare, ChessboardSquare movingToChessSquare)
+        public List<Point> validateMoves(ChessboardSquare movingFromChessSquare, List<Point> pointList)
         {
 
             // variables
-            bool isValidMove = false;
             bool enemyPieceDiagonal = false;
 
-
-            //if chess piece is white
-            if (movingFromChessSquare.squareChessPiece.pieceColor == 0)
+            // eliminate moves from the list that are not permissible moves
+            foreach(Point point in pointList)
             {
-
-
-
-                //**** use a foreach loop to check each potential move added to the list ****
-                foreach()
+                //call moveEliminator for each point in the point list
+                //if true do nothing
+                if(moveEliminator(point))
                 {
-
+                    //do nothing
                 }
 
-                //if enemypiece diagonal
-
-
-                    //if square.squareArrayRow, square.squareArrowCol within movable area
-
-                    //set isValidMove = true
-
-                    //else 
-                    //do nothing
-
+                else
+                {
+                    //remove from list
+                }
 
             }
 
-            //if chess piece is black
-            else
-            {
 
-                //if square.squareArrayRow, square.squareArrowCol within movable area
-                //set isValidMove = true
+            return pointList;
 
-                //else 
-                //do nothing
+        }
 
-            }
+        public bool moveEliminator(Point move)
+        {
+            bool isValidMove = true;
+
+            //is the move outside the bounds of the board?
+
+            //is there a piece in the way of this move?
+
+            //is there a piece that can be taken by moving to this square?
+
 
             return isValidMove;
-
         }
 
 
