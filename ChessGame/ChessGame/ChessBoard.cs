@@ -237,8 +237,10 @@ namespace ChessGame
 
             ChessboardSquare theSender = ((ChessboardSquare)sender);
 
-            currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
-            
+
+
+
+
             //if 1st time clicking this square or if it is outside move range
 
             //if piece == null and not in move range
@@ -246,10 +248,10 @@ namespace ChessGame
 
             //if first time getting clicked -> display potential moves
 
-                //currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
+            //currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
 
             //now that we have all potential moves let's eliminate moves that are prohibited for various reasons such as: other pieces blocking, king in check
-                //eg: pawnpiece that doesn't have an enemy piece diagonally cannot move diagonnally
+            //eg: pawnpiece that doesn't have an enemy piece diagonally cannot move diagonnally
             //check board for exceptions
 
 
@@ -267,6 +269,15 @@ namespace ChessGame
             //this.squareChessPiece.
 
 
+
+            //return potential moves
+            currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
+
+            //validate the returned list of potentail moves
+            validateMoves(theSender, currentPotentialMoves);
+
+            //color squares of potential moves
+            displayPotentialMoves(currentPotentialMoves);
 
             Debug.WriteLine(theSender.squareArrayRow.ToString() + "," + theSender.squareArrayCol.ToString());
 
@@ -300,17 +311,18 @@ namespace ChessGame
                 //if true do nothing
                 if(moveEliminator(point))
                 {
-                    //do nothing
+                    //no action required the point is valid
                 }
 
                 else
                 {
-                    //remove from list
+                    //remove from list, this point is invalid
+                    pointList.Remove(point);
+
                 }
 
             }
-
-
+            //return list of possible moves
             return pointList;
 
         }
@@ -319,14 +331,35 @@ namespace ChessGame
         {
             bool isValidMove = true;
 
-            //is the move outside the bounds of the board?
+            // is the move outside the bounds of the board?
+            if(move.X > 7 || move.X < 0 || move.Y < 0 || move.Y > 7)
+            {
+                isValidMove = false;
+            }
 
-            //is there a piece in the way of this move?
+            // is there a piece in the way of this move?
+            else if (chessboardSquareArray[move.X, move.Y].squareChessPiece != null)
+            {
+                //is the piece on this square a friendly or enemy piece?
+                isValidMove = false;
 
-            //is there a piece that can be taken by moving to this square?
+                //**still needs some work
+            }
 
-
+            // return the result of the validity check
             return isValidMove;
+        }
+
+
+        public void displayPotentialMoves(List<Point> moves)
+        {
+
+            // hilight each chessboard square to show potential moves
+            foreach(Point point in moves)
+            {
+                chessboardSquareArray[point.X, point.Y].BackColor = Color.Fuchsia;
+            }
+
         }
 
 
