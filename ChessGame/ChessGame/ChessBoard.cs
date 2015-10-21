@@ -237,49 +237,54 @@ namespace ChessGame
 
             ChessboardSquare theSender = ((ChessboardSquare)sender);
 
+                // if the chessboard square clicked has no chesspiece skip over code
+            if(theSender.squareChessPiece == null)
+            {
+                Debug.WriteLine("this would have thrown an error");
+            }
+                //if chesspiece exists on this square run the codez!
+            else
+            { 
+                //if 1st time clicking this square or if it is outside move range
+
+                //if piece == null and not in move range
+                //don't do anything 
+
+                //if first time getting clicked -> display potential moves
+
+                //currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
+
+                //now that we have all potential moves let's eliminate moves that are prohibited for various reasons such as: other pieces blocking, king in check
+                //eg: pawnpiece that doesn't have an enemy piece diagonally cannot move diagonnally
+                //check board for exceptions
+
+
+                //else if 2nd time getting clicked
+                //if in moving range for that piece
+                //move piece 
+
+                //else if not in moving range for that piece
+                //
+
+                //display potential moves
+                //hilight squares where user could move piece
+
+
+                //this.squareChessPiece.
 
 
 
+                //return potential moves
+                currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
 
-            //if 1st time clicking this square or if it is outside move range
+                //validate the returned list of potentail moves
+                validateMoves(theSender, currentPotentialMoves);
 
-            //if piece == null and not in move range
-            //don't do anything 
+                //color squares of potential moves
+                displayPotentialMoves(currentPotentialMoves);
 
-            //if first time getting clicked -> display potential moves
-
-            //currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
-
-            //now that we have all potential moves let's eliminate moves that are prohibited for various reasons such as: other pieces blocking, king in check
-            //eg: pawnpiece that doesn't have an enemy piece diagonally cannot move diagonnally
-            //check board for exceptions
-
-
-            //else if 2nd time getting clicked
-            //if in moving range for that piece
-            //move piece 
-
-            //else if not in moving range for that piece
-            //
-
-            //display potential moves
-            //hilight squares where user could move piece
-
-
-            //this.squareChessPiece.
-
-
-
-            //return potential moves
-            currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
-
-            //validate the returned list of potentail moves
-            validateMoves(theSender, currentPotentialMoves);
-
-            //color squares of potential moves
-            displayPotentialMoves(currentPotentialMoves);
-
-            Debug.WriteLine(theSender.squareArrayRow.ToString() + "," + theSender.squareArrayCol.ToString());
+                Debug.WriteLine(theSender.squareArrayRow.ToString() + "," + theSender.squareArrayCol.ToString());
+            }
 
         } //end picturebox clicked event
 
@@ -305,7 +310,7 @@ namespace ChessGame
             bool enemyPieceDiagonal = false;
 
             // eliminate moves from the list that are not permissible moves
-            foreach(Point point in pointList)
+            foreach(Point point in pointList.ToList())
             {
                 //call moveEliminator for each point in the point list
                 //if true do nothing
@@ -318,6 +323,9 @@ namespace ChessGame
                 {
                     //remove from list, this point is invalid
                     pointList.Remove(point);
+
+                    //are there points beyond this one that need to be removed?
+
 
                 }
 
@@ -362,6 +370,81 @@ namespace ChessGame
 
         }
 
+        // ******* Directional board checking ******* //
+
+        //check up direction
+        public bool checkUp(Point startingPoint, int numberOfRuns)
+        {
+            bool isOccupied = true;
+
+
+
+            return isOccupied;
+        }
+
+        //check left direction
+        public bool checkLeft(Point startingPoint, int numberOfRuns)
+        {
+            bool isOccupied = true;
+
+
+
+
+            return isOccupied;
+        }
+
+        //check right direction
+        public bool checkRight(Point startingPoint, int numberOfRuns)
+        {
+            bool isOccupied = true;
+
+
+
+            return isOccupied;
+        }
+
+        //check down direction
+        public bool checkDown(Point startingPoint, int numberOfRuns)
+        {
+            bool isOccupied = true;
+
+
+
+            return isOccupied;
+        }
+
+
+        //check diagupl direction
+        public bool checkDiagUpLeft(Point startingPoint, int numberOfRuns)
+        {
+            bool isOccupied = true;
+
+
+
+            return isOccupied;
+        }
+
+
+        //check diagupr direction
+        public bool checkDiagUpRight(Point startingPoint, int numberOfRuns)
+        {
+            bool isOccupied = true;
+
+
+
+            return isOccupied;
+        }
+
+
+        //check diagdownl direction
+        public bool checkDiagDownLeft(Point startingPoint, int numberOfRuns)
+        {
+            bool isOccupied = true;
+
+
+
+            return isOccupied;
+        }
 
     }
 }
