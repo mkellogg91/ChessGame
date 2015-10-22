@@ -335,7 +335,7 @@ namespace ChessGame
 
         }
 
-        public bool moveEliminator(Point move)
+        public bool moveEliminator(Point move, ChessboardSquare squareClicked)
         {
             bool isValidMove = true;
 
@@ -351,100 +351,228 @@ namespace ChessGame
                 //is the piece on this square a friendly or enemy piece?
                 isValidMove = false;
 
-                //**still needs some work
+                //once we have found a blocking piece, figure out which direction it is from clicked piece
+
+                ChessPiece clickedPiece = squareClicked.squareChessPiece;
+
+                if (clickedPiece is KingPiece)
+                {
+
+                    //eliminate based on king movement
+
+                    //is blocking piece enemy piece? make isEnemy method
+
+
+                }
+                else if (clickedPiece is QueenPiece)
+                {
+
+                    //eliminate based on queen movement
+
+                    //is blocking piece enemy piece? make isEnemy method
+
+                }
+                else if (clickedPiece is BishopPiece)
+                {
+
+                    //eliminate based on bishop movement
+
+                    //is blocking piece enemy piece? make isEnemy method
+
+                }
+                else if (clickedPiece is HorsemanPiece)
+                {
+
+                    //eliminate based on knight movement
+
+                    //is blocking piece enemy piece? make isEnemy method
+
+                }
+                else if (clickedPiece is PawnPiece)
+                {
+
+                    //eliminate based on pawn movement
+
+                    //is blocking piece enemy piece? make isEnemy method
+
+                }
+                else if (clickedPiece is RookPiece)
+                {
+
+                    //eliminate based on rook movement
+
+                    //is blocking piece enemy piece? make isEnemy method
+
+                }
+
             }
+            //conditional checking based on piece type
+            else
+            {
+
+                
+
+
+            }
+
 
             // return the result of the validity check
             return isValidMove;
         }
 
-
-        public void displayPotentialMoves(List<Point> moves)
+        public int returnBlockerDirection(Point clickedPosition, Point blockerPosition)
         {
+            /*
+            index:
+            0 = up
+            1 = diagupright
+            2 = right
+            3 = diagdownright
+            4 = down
+            5 = diagdownleft
+            6 = left
+            7 = diagupleft
+            */
 
-            // hilight each chessboard square to show potential moves
-            foreach(Point point in moves)
+            int theDirection = 0;
+
+            //0 up
+            if((blockerPosition.X < clickedPosition.X) && (blockerPosition.Y == clickedPosition.Y))
             {
-                chessboardSquareArray[point.X, point.Y].BackColor = Color.Fuchsia;
+                theDirection = 0;
             }
 
+            //1 diagupright
+            else if((blockerPosition.X < clickedPosition.X) && (blockerPosition.Y > clickedPosition.Y))
+            {
+                theDirection = 1;
+            }
+
+            //2 right
+            else if ((blockerPosition.X == clickedPosition.X) && (blockerPosition.Y > clickedPosition.Y))
+            {
+                theDirection = 2;
+            }
+
+            //3 diagdownright
+            else if ((blockerPosition.X > clickedPosition.X) && (blockerPosition.Y > clickedPosition.Y))
+            {
+                theDirection = 3;
+            }
+
+            //4 down
+            else if ((blockerPosition.X > clickedPosition.X) && (blockerPosition.Y == clickedPosition.Y))
+            {
+                theDirection = 4;
+            }
+
+            //5 diagdownleft
+            else if ((blockerPosition.X > clickedPosition.X) && (blockerPosition.Y < clickedPosition.Y))
+            {
+                theDirection = 5;
+            }
+
+            //6 left
+            else if ((blockerPosition.X == clickedPosition.X) && (blockerPosition.Y < clickedPosition.Y))
+            {
+                theDirection = 6;
+            }
+
+            //7 diagupleft
+            else if ((blockerPosition.X < clickedPosition.X) && (blockerPosition.Y < clickedPosition.Y))
+            {
+                theDirection = 7;
+            }
+
+            return theDirection;
         }
 
-        // ******* Directional board checking ******* //
+        //public void displayPotentialMoves(List<Point> moves)
+        //{
 
-        //check up direction
-        public bool checkUp(Point startingPoint, int numberOfRuns)
-        {
-            bool isOccupied = true;
+        //    // hilight each chessboard square to show potential moves
+        //    foreach(Point point in moves)
+        //    {
+        //        chessboardSquareArray[point.X, point.Y].BackColor = Color.Fuchsia;
+        //    }
 
+        //}
 
+        //// ******* Directional board checking ******* //
 
-            return isOccupied;
-        }
-
-        //check left direction
-        public bool checkLeft(Point startingPoint, int numberOfRuns)
-        {
-            bool isOccupied = true;
-
-
-
-
-            return isOccupied;
-        }
-
-        //check right direction
-        public bool checkRight(Point startingPoint, int numberOfRuns)
-        {
-            bool isOccupied = true;
+        ////check up direction
+        //public bool checkUp(Point startingPoint, int numberOfRuns)
+        //{
+        //    bool isOccupied = true;
 
 
 
-            return isOccupied;
-        }
+        //    return isOccupied;
+        //}
 
-        //check down direction
-        public bool checkDown(Point startingPoint, int numberOfRuns)
-        {
-            bool isOccupied = true;
-
-
-
-            return isOccupied;
-        }
-
-
-        //check diagupl direction
-        public bool checkDiagUpLeft(Point startingPoint, int numberOfRuns)
-        {
-            bool isOccupied = true;
+        ////check left direction
+        //public bool checkLeft(Point startingPoint, int numberOfRuns)
+        //{
+        //    bool isOccupied = true;
 
 
 
-            return isOccupied;
-        }
 
+        //    return isOccupied;
+        //}
 
-        //check diagupr direction
-        public bool checkDiagUpRight(Point startingPoint, int numberOfRuns)
-        {
-            bool isOccupied = true;
-
-
-
-            return isOccupied;
-        }
-
-
-        //check diagdownl direction
-        public bool checkDiagDownLeft(Point startingPoint, int numberOfRuns)
-        {
-            bool isOccupied = true;
+        ////check right direction
+        //public bool checkRight(Point startingPoint, int numberOfRuns)
+        //{
+        //    bool isOccupied = true;
 
 
 
-            return isOccupied;
-        }
+        //    return isOccupied;
+        //}
+
+        ////check down direction
+        //public bool checkDown(Point startingPoint, int numberOfRuns)
+        //{
+        //    bool isOccupied = true;
+
+
+
+        //    return isOccupied;
+        //}
+
+
+        ////check diagupl direction
+        //public bool checkDiagUpLeft(Point startingPoint, int numberOfRuns)
+        //{
+        //    bool isOccupied = true;
+
+
+
+        //    return isOccupied;
+        //}
+
+
+        ////check diagupr direction
+        //public bool checkDiagUpRight(Point startingPoint, int numberOfRuns)
+        //{
+        //    bool isOccupied = true;
+
+
+
+        //    return isOccupied;
+        //}
+
+
+        ////check diagdownl direction
+        //public bool checkDiagDownLeft(Point startingPoint, int numberOfRuns)
+        //{
+        //    bool isOccupied = true;
+
+
+
+        //    return isOccupied;
+        //}
 
     }
 }
