@@ -70,6 +70,71 @@ namespace ChessGame
 
         }
 
+        public override Point upDiagLeftMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X -= 1;
+                startingPoint.Y -= 1;
+
+            }
+            return startingPoint;
+
+        }
+
+        public override Point upMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint;   //bishops don't move up
+        }
+
+        public override Point upDiagRightMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X -= 1;
+                startingPoint.Y += 1;
+            }
+            return startingPoint;
+
+        }
+
+        public override Point leftMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint; //bishops don't move left
+        }
+
+        public override Point rightMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint;   //bishops don't move right
+        }
+
+        public override Point downDiagLeftMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X += 1;
+                startingPoint.Y -= 1;
+            }
+            return startingPoint;
+
+        }
+
+        public override Point downMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint;   //bishops don't move down
+        }
+
+        public override Point downDiagRightMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X += 1;
+                startingPoint.Y += 1;
+            }
+            return startingPoint;
+
+        }
+
 
     }
 }

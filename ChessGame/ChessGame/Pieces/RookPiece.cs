@@ -44,8 +44,7 @@ namespace ChessGame
             Point movePoint;
 
                 //will never have to move more than 8 spaces
-                for (int iterator = 1; iterator < 8; iterator++)
-                {
+                
                     //add upmove
                     movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
                     potentialMoveList.Add(movePoint);
@@ -63,10 +62,68 @@ namespace ChessGame
                     movePoint = rightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
                     potentialMoveList.Add(movePoint);
 
-                }
-
             return potentialMoveList;
 
+        }
+
+        public override Point upDiagLeftMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint;   //rooks don't move diagonally
+        }
+
+        public override Point upMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X -= 1;
+            }
+            return startingPoint;
+
+        }
+
+        public override Point upDiagRightMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint;   //rooks don't move diagonally
+        }
+
+        public override Point leftMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.Y -= 1;
+            }
+            return startingPoint;
+
+        }
+
+        public override Point rightMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.Y += 1;
+            }
+            return startingPoint;
+
+        }
+
+        public override Point downDiagLeftMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint;   //rooks don't move diagonally
+        }
+
+        public override Point downMove(Point startingPoint, int numberOfRuns)
+        {
+            for (int x = 0; x < numberOfRuns; x++)
+            {
+                startingPoint.X += 1;
+            }
+            return startingPoint;
+
+        }
+
+        public override Point downDiagRightMove(Point startingPoint, int numberOfRuns)
+        {
+            return startingPoint;   //rooks don't move diagonally
         }
 
 
