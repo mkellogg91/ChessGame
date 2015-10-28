@@ -318,12 +318,122 @@ namespace ChessGame
         public override List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
         {
 
+
+            // list to return of potential moves
             List<Point> potentialMoveList = new List<Point>();
 
+            // represents the current potential move that we will either add or not add to the list
             Point movePoint;
 
+            // this is the iterator for our looping through outer loop potential moves for this square
+            int outerIterator;
 
-            //loop through each of the 8 directions, 1 direction at a time until it hits the boarder or another piece
+            // this is the iterator for our looping through inner loop potential moves for this square
+            int innerIterator = 0;
+
+            // clicked piece color
+            int clickedPieceColor = chessSquare.squareChessPiece.pieceColor;
+
+
+            //* loop through each of the 8 directions, 1 direction at a time until it hits the boarder or another piece *//
+
+            // outer loop ends once we have looped through each of the 8 directions pieces can move
+            for(outerIterator = 0; outerIterator <= 7; outerIterator++)
+            {
+
+                // innter loop ends once we hit another piece or the boarder's edge
+                do
+                {
+                    // set movePoint variable to null at the top of each iteration
+
+                    movePoint = new Point(0,0);
+               
+                    
+                    // switch statement for each of the 8 directions
+                    switch(outerIterator)
+                    {
+                        // up move potentials
+                        case 0:
+                            movePoint = chessSquare.squareChessPiece.upMove(chessSquare.point, innerIterator);
+                            break;
+
+                        // updiagright move potentials
+                        case 1:
+                            movePoint = chessSquare.squareChessPiece.upDiagRightMove(chessSquare.point, innerIterator);
+                            break;
+
+                        // right move potentials
+                        case 2:
+                            movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.point, innerIterator);
+                            break;
+
+                        // downdiagright move potentials
+                        case 3:
+                            movePoint = chessSquare.squareChessPiece.downDiagRightMove(chessSquare.point, innerIterator);
+                            break;
+
+                        // down move potentials
+                        case 4:
+                            movePoint = chessSquare.squareChessPiece.downMove(chessSquare.point, innerIterator);
+                            break;
+
+                        // downdiagleft move potentials
+                        case 5:
+                            movePoint = chessSquare.squareChessPiece.downDiagLeftMove(chessSquare.point, innerIterator);
+                            break;
+
+                        // left move potentials
+                        case 6:
+                            movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.point, innerIterator);
+                            break;
+
+                        // updiagleft move potentials
+                        case 7:
+                            movePoint = chessSquare.squareChessPiece.upDiagLeftMove(chessSquare.point, innerIterator);
+                            break;
+                    }
+
+                    // check if we are outside the bounds of the board
+                    if(movePoint.X > 7 || movePoint.X < 0 || movePoint.Y > 7 || movePoint.Y < 0)
+                    {
+                        break;
+                    }
+
+                    // check if the returned square contains a chess piece
+                    else if(chessboardSquareArray[movePoint.X , movePoint.Y].squareChessPiece != null)
+                    {
+
+                        // if chess piece color is different, this square can be added to potential move list
+                        if(chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece.pieceColor != clickedPieceColor)
+                        {
+                            // add to potential move list
+                            potentialMoveList.Add(movePoint);
+
+                            // iterate to next move direction
+                            break;
+
+                            // if the chess peiece is the same color, this square is excluded from potential moves
+                        }
+
+                            
+                    // if chessSquare has no chesspiece and is within bounds of the board it can be added to potential moves
+                    }
+                        
+                        
+
+                    // if point is greater than 7 or less than 0  
+
+                        // iterate +1 to next direction
+
+                innerIterator++;
+
+                    // iterate until we hit a chess piece on a square or we hit the board's edge
+                }while(); // END INNER LOOP
+
+
+                // iterate until all directions have been covered
+            } // END OUTER LOOP
+
 
             //special conditions for pawn piece, but otherwise all moves should be handled by override
 

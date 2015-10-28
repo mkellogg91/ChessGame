@@ -70,6 +70,11 @@ namespace ChessGame
 
         }
 
+
+        // START MOVE DIRECTIONS HERE
+
+
+        // updiagleft move
         public override Point upDiagLeftMove(Point startingPoint, int numberOfRuns)
         {
             for (int x = 0; x < numberOfRuns; x++)
@@ -82,11 +87,14 @@ namespace ChessGame
 
         }
 
+        // up move
         public override Point upMove(Point startingPoint, int numberOfRuns)
         {
             return startingPoint;   //bishops don't move up
         }
 
+
+        // updiagright move
         public override Point upDiagRightMove(Point startingPoint, int numberOfRuns)
         {
             for (int x = 0; x < numberOfRuns; x++)
@@ -98,16 +106,21 @@ namespace ChessGame
 
         }
 
+
+        // left move
         public override Point leftMove(Point startingPoint, int numberOfRuns)
         {
             return startingPoint; //bishops don't move left
         }
 
+        // right move
         public override Point rightMove(Point startingPoint, int numberOfRuns)
         {
             return startingPoint;   //bishops don't move right
         }
 
+
+        // downdiagleft move
         public override Point downDiagLeftMove(Point startingPoint, int numberOfRuns)
         {
             for (int x = 0; x < numberOfRuns; x++)
@@ -119,11 +132,13 @@ namespace ChessGame
 
         }
 
+        // down move
         public override Point downMove(Point startingPoint, int numberOfRuns)
         {
             return startingPoint;   //bishops don't move down
         }
 
+        // downdiagright move
         public override Point downDiagRightMove(Point startingPoint, int numberOfRuns)
         {
             for (int x = 0; x < numberOfRuns; x++)
