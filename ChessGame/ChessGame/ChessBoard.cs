@@ -277,9 +277,6 @@ namespace ChessGame
                 //return potential moves
                 currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
 
-                //validate the returned list of potentail moves
-                validateMoves(theSender, currentPotentialMoves);
-
                 //color squares of potential moves
                 displayPotentialMoves(currentPotentialMoves);
 
@@ -315,7 +312,7 @@ namespace ChessGame
             return isValidMove;
         }
 
-        public override List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
+        public List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
         {
 
 
@@ -334,6 +331,11 @@ namespace ChessGame
             // clicked piece color
             int clickedPieceColor = chessSquare.squareChessPiece.pieceColor;
 
+            // store type of piece that is currently moving
+            Object clickedPiece = chessSquare.squareChessPiece.GetType();
+
+
+
 
             //* loop through each of the 8 directions, 1 direction at a time until it hits the boarder or another piece *//
 
@@ -341,56 +343,92 @@ namespace ChessGame
             for(outerIterator = 0; outerIterator <= 7; outerIterator++)
             {
 
+                
+
                 // innter loop ends once we hit another piece or the boarder's edge
                 do
                 {
                     // set movePoint variable to null at the top of each iteration
 
                     movePoint = new Point(0,0);
-               
-                    
-                    // switch statement for each of the 8 directions
-                    switch(outerIterator)
+
+                    // if object type == pawn 
+                    if (clickedPiece == typeof(PawnPiece))
                     {
-                        // up move potentials
-                        case 0:
-                            movePoint = chessSquare.squareChessPiece.upMove(chessSquare.point, innerIterator);
-                            break;
+                        // if piece color == white
+                        if (clickedPieceColor == 0)
+                        {
+                            // logic for potential moves
 
-                        // updiagright move potentials
-                        case 1:
-                            movePoint = chessSquare.squareChessPiece.upDiagRightMove(chessSquare.point, innerIterator);
-                            break;
 
-                        // right move potentials
-                        case 2:
-                            movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.point, innerIterator);
-                            break;
+                        }
 
-                        // downdiagright move potentials
-                        case 3:
-                            movePoint = chessSquare.squareChessPiece.downDiagRightMove(chessSquare.point, innerIterator);
-                            break;
+                        // else (if piece color is black)
+                        else
+                        {
+                            // inverse logic for potential moves of above
 
-                        // down move potentials
-                        case 4:
-                            movePoint = chessSquare.squareChessPiece.downMove(chessSquare.point, innerIterator);
-                            break;
 
-                        // downdiagleft move potentials
-                        case 5:
-                            movePoint = chessSquare.squareChessPiece.downDiagLeftMove(chessSquare.point, innerIterator);
-                            break;
+                        }
 
-                        // left move potentials
-                        case 6:
-                            movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.point, innerIterator);
-                            break;
 
-                        // updiagleft move potentials
-                        case 7:
-                            movePoint = chessSquare.squareChessPiece.upDiagLeftMove(chessSquare.point, innerIterator);
-                            break;
+                    }
+                    // else if object type == knight
+                    else if (clickedPiece == typeof(HorsemanPiece))
+                    {
+                        // check potential moves in each direction, maybe use another switch then we will continue with normal checks
+
+
+                    }
+
+                    // else 
+                    else
+                    {
+
+                        // switch statement for each of the 8 directions if it isn't a knight, or pawn
+                        switch (outerIterator)
+                        {
+                            // up move potentials
+                            case 0:
+                                movePoint = chessSquare.squareChessPiece.upMove(chessSquare.point, innerIterator);
+                                break;
+
+                            // updiagright move potentials
+                            case 1:
+                                movePoint = chessSquare.squareChessPiece.upDiagRightMove(chessSquare.point, innerIterator);
+                                break;
+
+                            // right move potentials
+                            case 2:
+                                movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.point, innerIterator);
+                                break;
+
+                            // downdiagright move potentials
+                            case 3:
+                                movePoint = chessSquare.squareChessPiece.downDiagRightMove(chessSquare.point, innerIterator);
+                                break;
+
+                            // down move potentials
+                            case 4:
+                                movePoint = chessSquare.squareChessPiece.downMove(chessSquare.point, innerIterator);
+                                break;
+
+                            // downdiagleft move potentials
+                            case 5:
+                                movePoint = chessSquare.squareChessPiece.downDiagLeftMove(chessSquare.point, innerIterator);
+                                break;
+
+                            // left move potentials
+                            case 6:
+                                movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.point, innerIterator);
+                                break;
+
+                            // updiagleft move potentials
+                            case 7:
+                                movePoint = chessSquare.squareChessPiece.upDiagLeftMove(chessSquare.point, innerIterator);
+                                break;
+                        }
+
                     }
 
                     // check if we are outside the bounds of the board
@@ -410,25 +448,34 @@ namespace ChessGame
                             potentialMoveList.Add(movePoint);
 
                             // iterate to next move direction
-                            break;
-
-                            // if the chess peiece is the same color, this square is excluded from potential moves
-                        }
+                            break;  // break out of the loop
 
                             
-                    // if chessSquare has no chesspiece and is within bounds of the board it can be added to potential moves
+                        }
+                        // if the chess peiece is the same color, this square is excluded from potential moves
+                        else
+                        {
+                            break;  // break out of the loop
+                        }
+
+                        
                     }
-                        
-                        
+                    // if chessSquare has no chesspiece and is within bounds of the board it can be added to potential moves
+                    else
+                    {
+                        potentialMoveList.Add(movePoint);
+                    }
 
-                    // if point is greater than 7 or less than 0  
 
-                        // iterate +1 to next direction
+                    // if the piece type is a king then we must make sure to not iterate past 1
 
-                innerIterator++;
+                    // if the piece type is pawn may need to not iterate past 3?
+                   
+
+                    innerIterator++;
 
                     // iterate until we hit a chess piece on a square or we hit the board's edge
-                }while(); // END INNER LOOP
+                }while(innerIterator <= 7); // END INNER LOOP
 
 
                 // iterate until all directions have been covered
