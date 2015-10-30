@@ -301,17 +301,6 @@ namespace ChessGame
 
 
 
-
-        public bool moveEliminator(Point move, ChessboardSquare squareClicked)
-        {
-            bool isValidMove = true;
-
-            
-
-            // return the result of the validity check
-            return isValidMove;
-        }
-
         public List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
         {
 
@@ -334,7 +323,8 @@ namespace ChessGame
             // store type of piece that is currently moving
             Object clickedPiece = chessSquare.squareChessPiece.GetType();
 
-
+            // special case bool for not allowing a move to be added to potential move list
+            bool canBeAdded = true;
 
 
             //* loop through each of the 8 directions, 1 direction at a time until it hits the boarder or another piece *//
@@ -351,14 +341,73 @@ namespace ChessGame
                     // set movePoint variable to null at the top of each iteration
 
                     movePoint = new Point(0,0);
+                    canBeAdded = true;
 
-                    // if object type == pawn 
+                    // if piece type == pawn 
                     if (clickedPiece == typeof(PawnPiece))
                     {
                         // if piece color == white
                         if (clickedPieceColor == 0)
-                        {
-                            // logic for potential moves
+                        { 
+                            // switch statement for each of the potential moves of a pawn
+                            switch(innerIterator)
+                            {
+                                // up diag left move
+                                case 0:
+                                    movePoint = chessSquare.squareChessPiece.upDiagLeftMove(chessSquare.point, 1);
+                                    break;
+                                
+                                // up move
+                                case 1:
+                                    movePoint = chessSquare.squareChessPiece.upMove(chessSquare.point, 1);
+                                    break;
+
+                                // up move 2X
+                                case 2:
+                                    movePoint = chessSquare.squareChessPiece.upMove(chessSquare.point, 2);
+                                    break;
+
+                                // up diag right move
+                                case 3:
+                                    movePoint = chessSquare.squareChessPiece.upDiagRightMove(chessSquare.point, 1);
+                                    break;
+                            }
+
+                            // check if this is a diagonal move
+                            if(innerIterator == 0 || innerIterator == 3)
+                            {
+
+                                // check if piece is outside the bounds of the board
+                                if(isOutOfBounds(movePoint))
+                                {
+                                    // if outside board don't do anything
+                                    break;
+                                }
+
+                                // check if there is a chesspiece present diagonally, the code will check to see if it an ally or enemy later and add it or not depending on which it is
+                                else if(chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece != null)
+                                {
+                                    canBeAdded = true;
+                                }
+
+                                // if there is no chesspiece present diagonally, this move cannot be added
+                                else
+                                {
+                                    canBeAdded = false;
+                                }
+
+                            }
+
+                            // check if pawn piece should be able to legally move 2 spaces forward
+                            else if(innerIterator == 2)
+                            {
+                                // check if the pawn piece started on its original row
+                                if(chessSquare.point.X == (PawnPiece)chessSquare.squareChessPiece.)
+                                {
+
+                                }
+                            }
+
 
 
                         }
@@ -431,8 +480,8 @@ namespace ChessGame
 
                     }
 
-                    // check if we are outside the bounds of the board
-                    if(movePoint.X > 7 || movePoint.X < 0 || movePoint.Y > 7 || movePoint.Y < 0)
+                    // check if we are outside the bounds of the board, if so, break
+                    if(isOutOfBounds(movePoint))
                     {
                         break;
                     }
@@ -486,6 +535,27 @@ namespace ChessGame
 
 
             return potentialMoveList;
+        }
+
+            
+        public bool isOutOfBounds(Point potentialMove)
+        {
+
+            if(potentialMove.X > 7 || potentialMove.X < 0)
+            {
+                // point is out of bounds
+                return true;
+            }
+            else if(potentialMove.Y > 7 || potentialMove.Y < 0)
+            {
+                // point is out of bounds
+                return true;
+            }
+            else
+            {
+                // point is not out of bounds
+                return false;
+            }
         }
 
 

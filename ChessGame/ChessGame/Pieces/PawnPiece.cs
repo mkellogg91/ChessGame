@@ -11,18 +11,24 @@ namespace ChessGame
     public class PawnPiece : ChessPiece
     {
 
+        public int startingPoint { get; set; }
+
         // CONSTRUCTOR
-        public PawnPiece(int color) : base (color)
+        public PawnPiece(int color) : base(color)
         {
-            //DETERMINE PIECE IMAGE
+            
+            
+            //DETERMINE PIECE IMAGE AND STARTING POINT
             if (pieceColor == 0)   // IF WHITE PIECE
             {
                 chesspieceImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("white_pawn");
+                startingPoint = 6;
                 //chesspieceImage = Image.FromFile("../Images/white_pawn.PNG");
             }
             else   // ELSE BLACK PIECE
             {
                 chesspieceImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("black_pawn");
+                startingPoint = 1;
                 //chesspieceImage = Image.FromFile("../Images/black_pawn.PNG");
             }
         }
