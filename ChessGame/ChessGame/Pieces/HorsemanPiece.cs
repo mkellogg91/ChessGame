@@ -27,67 +27,6 @@ namespace ChessGame
         }
 
 
-        // METHODS
-        public void pieceMove(ChessboardSquare previousChessSquare, ChessboardSquare newChessSquare)
-        {
-
-        }
-
-
-        public override List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
-        {
-
-            List<Point> potentialMoveList = new List<Point>();
-
-            Point movePoint;
-
-            
-                //add down 2x left 1x
-                movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 2);
-                movePoint = leftMove(movePoint, 1);
-                potentialMoveList.Add(movePoint);
-
-                //add down 1x left 2x
-                movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
-                movePoint = leftMove(movePoint, 2);
-                potentialMoveList.Add(movePoint);
-
-                //add up 1x left 2x
-                movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
-                movePoint = leftMove(movePoint, 2);
-                potentialMoveList.Add(movePoint);
-
-                //add up 2x left 1x
-                movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 2);
-                movePoint = leftMove(movePoint, 1);
-                potentialMoveList.Add(movePoint);
-
-                //add down 2x right 1x
-                movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 2);
-                movePoint = rightMove(movePoint, 1);
-                potentialMoveList.Add(movePoint);
-
-                //add down 1x right 2x
-                movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
-                movePoint = rightMove(movePoint, 2);
-                potentialMoveList.Add(movePoint);
-
-                //add up 1x right 2x
-                movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 1);
-                movePoint = rightMove(movePoint, 2);
-                potentialMoveList.Add(movePoint);
-
-                //add up 2x right 1x
-                movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), 2);
-                movePoint = rightMove(movePoint, 1);
-                potentialMoveList.Add(movePoint);
-            
-
-            return potentialMoveList;
-
-        }
-
-
         public override Point upDiagLeftMove(Point startingPoint, int numberOfRuns)
         {
             return startingPoint;   //knights don't require diagonal moves

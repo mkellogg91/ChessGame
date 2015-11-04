@@ -23,7 +23,7 @@ namespace ChessGame
         public ChessPiece squareChessPiece { get; set; }
         public Size pictureBoxSize { get; set; }
         public Point point { get; set; }
-
+        public Point boardLocation { get; set; }
 
         
         //picOneFaceUpA.MouseClick += new MouseEventHandler(your_event_handler);

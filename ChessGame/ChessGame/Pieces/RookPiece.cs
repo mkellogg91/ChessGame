@@ -25,46 +25,7 @@ namespace ChessGame
             }
         }
 
-        // PROPERTIES
 
-
-
-        // METHODS
-        public void pieceMove(ChessboardSquare previousChessSquare, ChessboardSquare newChessSquare)
-        {
-
-        }
-
-
-        public override List<Point> returnPotentialMoves(ChessboardSquare chessSquare)
-        {
-
-            List<Point> potentialMoveList = new List<Point>();
-
-            Point movePoint;
-
-                //will never have to move more than 8 spaces
-                
-                    //add upmove
-                    movePoint = upMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
-                    potentialMoveList.Add(movePoint);
-
-                    //add downmove
-                    movePoint = downMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
-                    potentialMoveList.Add(movePoint);
-
-
-                    //add leftmove
-                    movePoint = leftMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
-                    potentialMoveList.Add(movePoint);
-
-                    //add rightmove
-                    movePoint = rightMove(new Point(chessSquare.squareArrayRow, chessSquare.squareArrayCol), iterator);
-                    potentialMoveList.Add(movePoint);
-
-            return potentialMoveList;
-
-        }
 
         public override Point upDiagLeftMove(Point startingPoint, int numberOfRuns)
         {

@@ -31,12 +31,6 @@ namespace FrontEnd
 
             Application.Run(myChessForm);
 
-                
-
-
-            
-
-
         }
     }
 }
