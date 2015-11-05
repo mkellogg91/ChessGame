@@ -72,7 +72,7 @@ namespace ChessGame
             return startingPoint;   //knights don't require diagonal moves
         }
 
-        public Point downMove(Point startingPoint, int numberOfRuns)
+        public override Point downMove(Point startingPoint, int numberOfRuns)
         {
             for (int x = 0; x < numberOfRuns; x++)
             {

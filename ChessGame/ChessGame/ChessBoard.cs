@@ -143,9 +143,11 @@ namespace ChessGame
                     if (colorAlternator == 0)
                     {
                         
-                        //give the picturebox a color
+                        // give the picturebox a color
                         chessboardSquareArray[row, col].BackColor = Color.White;
-                        if(col == 7)
+                        // assign the color property of the square
+                        chessboardSquareArray[row, col].squareColor = Color.White;
+                        if (col == 7)
                         {
                             colorAlternator = 0;
                         }
@@ -158,6 +160,8 @@ namespace ChessGame
                     else
                     {
                         chessboardSquareArray[row, col].BackColor = Color.Black;
+                        // assign the color property of the square
+                        chessboardSquareArray[row, col].squareColor = Color.Black;
 
                         if (col == 7)
                         {
@@ -241,7 +245,7 @@ namespace ChessGame
                 // if the chessboard square clicked has no chesspiece skip over code
             if(theSender.squareChessPiece == null)
             {
-                Debug.WriteLine("this would have thrown an error");
+                // do nothing
             }
                 //if chesspiece exists on this square run the codez!
             else
@@ -321,6 +325,9 @@ namespace ChessGame
             // clicked piece color
             int clickedPieceColor = chessSquare.squareChessPiece.pieceColor;
 
+            // # of times inner loop should iterate
+            int innerLoopEnd = 0;
+
             // store type of piece that is currently moving
             Object clickedPiece = chessSquare.squareChessPiece.GetType();
 
@@ -334,30 +341,46 @@ namespace ChessGame
             for(outerIterator = 0; outerIterator <= 7; outerIterator++)
             {
 
-                
+                // determine how many iterations the inner loop should do
+                if (clickedPiece == typeof(PawnPiece))
+                {
+                    innerLoopEnd = 3;
+                }
+                else if (clickedPiece == typeof(HorsemanPiece))
+                {
+                    innerLoopEnd = 15;
+                }
+                else if (clickedPiece == typeof(KingPiece))
+                {
+                    innerLoopEnd = 0;
+                }
+                else
+                {
+                    innerLoopEnd = 7;
+                }
 
                 // innter loop ends once we hit another piece or the boarder's edge
                 do
                 {
                     // set movePoint variable to null at the top of each iteration
 
-                    movePoint = new Point(0,0);
+                    movePoint = new Point(0, 0);
                     canBeAdded = true;
-
+                  
                     // if piece type == pawn 
                     if (clickedPiece == typeof(PawnPiece))
                     {
                         // if piece color == white
                         if (clickedPieceColor == 0)
-                        { 
+                        {
                             // switch statement for each of the potential moves of a pawn
-                            switch(innerIterator)
+                            switch (innerIterator)
                             {
                                 // up diag left move
                                 case 0:
                                     movePoint = chessSquare.squareChessPiece.upDiagLeftMove(chessSquare.boardLocation, 1);
                                     break;
-                                
+
                                 // up move
                                 case 1:
                                     movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 1);
@@ -375,18 +398,18 @@ namespace ChessGame
                             }
 
                             // check if this is a diagonal move
-                            if(innerIterator == 0 || innerIterator == 3)
+                            if (innerIterator == 0 || innerIterator == 3)
                             {
 
                                 // check if piece is outside the bounds of the board
-                                if(isOutOfBounds(movePoint))
+                                if (isOutOfBounds(movePoint))
                                 {
                                     // if outside board don't do anything
-                                    break;
+
                                 }
 
                                 // check if there is a chesspiece present diagonally, the code will check to see if it an ally or enemy later and add it or not depending on which it is
-                                else if(chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece != null)
+                                else if (chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece != null)
                                 {
                                     canBeAdded = true;
                                 }
@@ -400,10 +423,10 @@ namespace ChessGame
                             }
 
                             // check if pawn piece should be able to legally move 2 spaces forward (index "2" represents the 2 spaces forward move)
-                            else if(innerIterator == 2)
+                            else if (innerIterator == 2)
                             {
                                 // check if the pawn piece started on its original row
-                                if(chessSquare.boardLocation.X == 6)
+                                if (chessSquare.boardLocation.X == 6)
                                 {
                                     // if so add to potential move list
                                     canBeAdded = true;
@@ -413,7 +436,7 @@ namespace ChessGame
                                 {
                                     canBeAdded = false;
                                 }
-                                
+
                             }
 
 
@@ -456,7 +479,7 @@ namespace ChessGame
                                 if (isOutOfBounds(movePoint))
                                 {
                                     // if outside board don't do anything
-                                    break;
+
                                 }
 
                                 // check if there is a chesspiece present diagonally, the code will check to see if it an ally or enemy later and add it or not depending on which it is
@@ -500,89 +523,89 @@ namespace ChessGame
                         // check potential moves in each direction, to see if there is a chess piece on any of them
                         switch (innerIterator)
                         {
-                        // UP
+                            // UP
                             // up 2x left 1x
                             case 0:
                                 movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.leftMove(movePoint, 1);
                                 break;
                             // up 1x left 2x
                             case 1:
                                 movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.leftMove(movePoint, 2);
                                 break;
                             // up 2x right 1x
                             case 2:
                                 movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.rightMove(movePoint, 1);
                                 break;
                             // up 1x right 2x
                             case 3:
                                 movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.rightMove(movePoint, 2);
                                 break;
-                        // RIGHT
+                            // RIGHT
                             // right 2x up 1x
                             case 4:
                                 movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.upMove(movePoint, 1);
                                 break;
                             // right 1x up 2x
                             case 5:
                                 movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.upMove(movePoint, 2);
                                 break;
                             // right 2x down 1x
                             case 6:
                                 movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.downMove(movePoint, 1);
                                 break;
                             // right 1x down 2x
                             case 7:
                                 movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.downMove(movePoint, 2);
                                 break;
-                        // DOWN
+                            // DOWN
                             // down 2x right 1x
                             case 8:
                                 movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.rightMove(movePoint, 1);
                                 break;
                             // down 1x right 2x
                             case 9:
                                 movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.rightMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.rightMove(movePoint, 2);
                                 break;
                             // down 2x left 1x
                             case 10:
                                 movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.leftMove(movePoint, 1);
                                 break;
                             // down 1x left 2x
                             case 11:
                                 movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.leftMove(movePoint, 2);
                                 break;
-                        // LEFT
+                            // LEFT
                             // left 2x down 1x
                             case 12:
                                 movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.downMove(movePoint, 1);
                                 break;
                             // left 1x down 2x
                             case 13:
                                 movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.downMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.downMove(movePoint, 2);
                                 break;
                             // left 2x up 1x
                             case 14:
                                 movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 2);
-                                movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 1);
+                                movePoint = chessSquare.squareChessPiece.upMove(movePoint, 1);
                                 break;
                             // left 1x up 2x
                             case 15:
                                 movePoint = chessSquare.squareChessPiece.leftMove(chessSquare.boardLocation, 1);
-                                movePoint = chessSquare.squareChessPiece.upMove(chessSquare.boardLocation, 2);
+                                movePoint = chessSquare.squareChessPiece.upMove(movePoint, 2);
                                 break;
                         }
 
@@ -641,17 +664,28 @@ namespace ChessGame
                     }
 
                     // check if we are outside the bounds of the board, if so, break
-                    if(isOutOfBounds(movePoint))
+                    if (isOutOfBounds(movePoint))
                     {
-                        break;
+                        // do nothing
+                    }
+                    // if there is a special circumstance that prevents move from being added, stop here
+                    else if (!canBeAdded)
+                    {
+                        // do nothing
                     }
 
                     // check if the returned square contains a chess piece
-                    else if(chessboardSquareArray[movePoint.X , movePoint.Y].squareChessPiece != null)
+                    else if (chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece != null)
                     {
 
+                        // check if the move should not be added for any special circumstance EG. pawn enemy not diagonal
+                        if (!canBeAdded)
+                        {
+                            // don't add to potential move list
+                        }
+
                         // if chess piece color is different, this square can be added to potential move list
-                        if(chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece.pieceColor != clickedPieceColor)
+                        else if (chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece.pieceColor != clickedPieceColor)
                         {
                             // add to potential move list
                             potentialMoveList.Add(movePoint);
@@ -659,7 +693,7 @@ namespace ChessGame
                             // iterate to next move direction
                             break;  // break out of the loop
 
-                            
+
                         }
                         // if the chess peiece is the same color, this square is excluded from potential moves
                         else
@@ -667,7 +701,7 @@ namespace ChessGame
                             break;  // break out of the loop
                         }
 
-                        
+
                     }
                     // if chessSquare has no chesspiece and is within bounds of the board it can be added to potential moves
                     else
@@ -675,20 +709,20 @@ namespace ChessGame
                         potentialMoveList.Add(movePoint);
                     }
 
-
-                    // if the piece type is a king then we must make sure to not iterate past 1
-
-                    // if the piece type is pawn may need to not iterate past 3?
-                   
-
                     innerIterator++;
 
                     // iterate until we hit a chess piece on a square or we hit the board's edge
-                }while(innerIterator <= 7); // END INNER LOOP
+                } while (innerIterator <= innerLoopEnd);
 
 
-                // iterate until all directions have been covered
-            } // END OUTER LOOP
+                // if type is pawn or knight we don't need the outer iterator at all
+                if (clickedPiece == typeof(PawnPiece) || clickedPiece == typeof(HorsemanPiece))
+                {
+                    break;
+                }
+
+                    // iterate until all directions have been covered
+            }   // END OUTER LOOP
 
 
             //special conditions for pawn piece, but otherwise all moves should be handled by override
@@ -730,114 +764,14 @@ namespace ChessGame
 
         }
 
-        //// ******* Directional board checking ******* //
-
-        ////check up direction
-        //public bool checkUp(Point startingPoint, int numberOfRuns)
-        //{
-        //    bool isOccupied = true;
-
-
-
-        //    return isOccupied;
-        //}
-
-        ////check left direction
-        //public bool checkLeft(Point startingPoint, int numberOfRuns)
-        //{
-        //    bool isOccupied = true;
-
-
-
-
-        //    return isOccupied;
-        //}
-
-        ////check right direction
-        //public bool checkRight(Point startingPoint, int numberOfRuns)
-        //{
-        //    bool isOccupied = true;
-
-
-
-        //    return isOccupied;
-        //}
-
-        ////check down direction
-        //public bool checkDown(Point startingPoint, int numberOfRuns)
-        //{
-        //    bool isOccupied = true;
-
-
-
-        //    return isOccupied;
-        //}
-
-
-        ////check diagupl direction
-        //public bool checkDiagUpLeft(Point startingPoint, int numberOfRuns)
-        //{
-        //    bool isOccupied = true;
-
-
-
-        //    return isOccupied;
-        //}
-
-
-        ////check diagupr direction
-        //public bool checkDiagUpRight(Point startingPoint, int numberOfRuns)
-        //{
-        //    bool isOccupied = true;
-
-
-
-        //    return isOccupied;
-        //}
-
-
-        ////check diagdownl direction
-        //public bool checkDiagDownLeft(Point startingPoint, int numberOfRuns)
-        //{
-        //    bool isOccupied = true;
-
-
-
-        //    return isOccupied;
-        //}
-
-
-        //public List<Point> validateMoves(ChessboardSquare movingFromChessSquare, List<Point> pointList)
-        //{
-
-        //    // variables
-        //    bool enemyPieceDiagonal = false;
-
-        //    // eliminate moves from the list that are not permissible moves
-        //    foreach(Point point in pointList.ToList())
-        //    {
-        //        //call moveEliminator for each point in the point list
-        //        //if true do nothing
-        //        if(moveEliminator(point))
-        //        {
-        //            //no action required the point is valid
-        //        }
-
-        //        else
-        //        {
-        //            //remove from list, this point is invalid
-        //            pointList.Remove(point);
-
-        //            //are there points beyond this one that need to be removed?
-
-
-        //        }
-
-        //    }
-        //    //return list of possible moves
-        //    return pointList;
-
-        //}
+       public void unDisplayPotentialMoves(List<Point> moves)
+        {
+            // change chessboard squares back to their original colors
+            foreach (Point point in moves)
+            {
+                chessboardSquareArray[point.X, point.Y].BackColor = chessboardSquareArray[point.X, point.Y].squareColor;
+            }
+        }
 
 
 

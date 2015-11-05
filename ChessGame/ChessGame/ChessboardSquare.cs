@@ -18,7 +18,7 @@ namespace ChessGame
         public int squareSize_x { get; set; }
         public int squareSize_y { get; set; }
         // CHESSBOARD SQUARES WILL HAVE A COLOR
-        public string squareColor { get; set; }
+        public Color squareColor { get; set; }
         // CHESSBOARD SQUARES WILL HAVE A CHESSPEICE OBJECT
         public ChessPiece squareChessPiece { get; set; }
         public Size pictureBoxSize { get; set; }
