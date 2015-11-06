@@ -19,6 +19,7 @@ namespace ChessGame
         public List<ChessPiece>whitePieces { get; set; }
         public List<ChessPiece> blackPieces { get; set; }
         private List<Point> currentPotentialMoves;
+        public bool isMoveClick = false;
 
         private int boardX;
         private int boardY;
@@ -237,48 +238,42 @@ namespace ChessGame
 
     } // end board builder
 
+                    // SQUARE CLICKED EVENT HERE ***
+
         void pictureBox_Clicked(object sender, EventArgs e)
         {
+            ChessboardSquare clickedSquare = (ChessboardSquare)sender;
+            
+            // determine if this click is a move click or display potential move click
+            isMoveClick = isMoveClickCheck(clickedSquare, currentPotentialMoves);
+
+            // if the square clicked is a square that exists in the potential move list from the previous click, move the piece 
+            if (isMoveClick)
+            {
+                
+                // is an enemy piece present on this spot? if so take it
+
+
+            }
+
+            // else 
+            else
+            {
+                // is the 
+
+            }
 
             ChessboardSquare theSender = ((ChessboardSquare)sender);
 
                 // if the chessboard square clicked has no chesspiece skip over code
             if(theSender.squareChessPiece == null)
             {
-                // do nothing
+                
             }
                 //if chesspiece exists on this square run the codez!
             else
             { 
-                //if 1st time clicking this square or if it is outside move range
-
-                //if piece == null and not in move range
-                //don't do anything 
-
-                //if first time getting clicked -> display potential moves
-
-                //currentPotentialMoves = theSender.squareChessPiece.returnPotentialMoves(theSender);
-
-                //now that we have all potential moves let's eliminate moves that are prohibited for various reasons such as: other pieces blocking, king in check
-                //eg: pawnpiece that doesn't have an enemy piece diagonally cannot move diagonnally
-                //check board for exceptions
-
-
-                //else if 2nd time getting clicked
-                //if in moving range for that piece
-                //move piece 
-
-                //else if not in moving range for that piece
-                //
-
-                //display potential moves
-                //hilight squares where user could move piece
-
-
-                //this.squareChessPiece.
-
-
-
+                
                 //return potential moves
                 currentPotentialMoves = returnPotentialMoves(theSender);
 
@@ -286,6 +281,10 @@ namespace ChessGame
                 displayPotentialMoves(currentPotentialMoves);
 
                 Debug.WriteLine(theSender.squareArrayRow.ToString() + "," + theSender.squareArrayCol.ToString());
+
+                
+
+
             }
 
         } //end picturebox clicked event
@@ -662,6 +661,7 @@ namespace ChessGame
                         }
 
                     }
+                    // CHECKING FOR ALL PIECES
 
                     // check if we are outside the bounds of the board, if so, break
                     if (isOutOfBounds(movePoint))
@@ -695,6 +695,11 @@ namespace ChessGame
 
 
                         }
+                        else if(clickedPiece == typeof(HorsemanPiece))
+                        {
+                            // do nothing in this case if it is a knight
+                        }
+
                         // if the chess peiece is the same color, this square is excluded from potential moves
                         else
                         {
@@ -773,6 +778,32 @@ namespace ChessGame
             }
         }
 
+            // method for checking if a click is a potential move click or a piece move click
+        public bool isMoveClickCheck(ChessboardSquare clicked, List<Point> moveList)
+        {
+            bool isMove = false;
+
+
+            
+                // the only time movelist is null is probably on first click of the application instance
+            if(moveList == null)
+            {
+                isMove = false;
+            }
+                // if square clicked exists in the potential move list set to true
+            else if (moveList.Contains(clicked.boardLocation))
+            {
+                isMove = true;
+            }
+                // in any other case, it is not a move click
+            else
+            {
+                isMove = false;
+            }
+
+
+            return isMove;
+        }
 
 
     }
