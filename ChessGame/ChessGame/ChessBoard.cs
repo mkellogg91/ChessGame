@@ -24,40 +24,6 @@ namespace ChessGame
         private int boardX;
         private int boardY;
 
-        //chesspiece declaration
-        //public KingPiece whiteKing;
-        //public QueenPiece whiteQueen;
-        //public BishopPiece whiteBishop1;
-        //public BishopPiece whiteBishop2;
-        //public HorsemanPiece whiteHorseman1;
-        //public HorsemanPiece whiteHorseman2;
-        //public RookPiece whiteRook1;
-        //public RookPiece whiteRook2;
-        //public PawnPiece whitePawn1;
-        //public PawnPiece whitePawn2;
-        //public PawnPiece whitePawn3;
-        //public PawnPiece whitePawn4;
-        //public PawnPiece whitePawn5;
-        //public PawnPiece whitePawn6;
-        //public PawnPiece whitePawn7;
-        //public PawnPiece whitePawn8;
-
-        //public KingPiece blackKing;
-        //public QueenPiece blackQueen;
-        //public BishopPiece blackBishop1;
-        //public BishopPiece blackBishop2;
-        //public HorsemanPiece blackHorseman1;
-        //public HorsemanPiece blackHorseman2;
-        //public RookPiece blackRook1;
-        //public RookPiece blackRook2;
-        //public PawnPiece blackPawn1;
-        //public PawnPiece blackPawn2;
-        //public PawnPiece blackPawn3;
-        //public PawnPiece blackPawn4;
-        //public PawnPiece blackPawn5;
-        //public PawnPiece blackPawn6;
-        //public PawnPiece blackPawn7;
-        //public PawnPiece blackPawn8;
 
         // CONSTRUCTOR HERE
         public ChessBoard()
@@ -250,42 +216,76 @@ namespace ChessGame
             // if the square clicked is a square that exists in the potential move list from the previous click, move the piece 
             if (isMoveClick)
             {
-                
+                // remove previous hilighted squares
+                unDisplayPotentialMoves(currentPotentialMoves);
+
                 // is an enemy piece present on this spot? if so take it
+                if(clickedSquare.squareChessPiece != null)
+                {
+                    // work on takePiece method
+                        // remove piece from the board
+                        // add to takenPieces list
 
+                    // move the piece (work on all the changes that have to be made on piece move in piece move method)    
 
+                }
+
+                
+                
             }
 
-            // else 
+            // else if this is not a move click
             else
             {
-                // is the 
+                // remove previous hilighted squares
+                if(currentPotentialMoves != null)
+                {
+                    unDisplayPotentialMoves(currentPotentialMoves);
+                }
+                
+                // does the square clicked have a piece present?
+                if(clickedSquare.squareChessPiece != null)
+                {
+                    // if so is the piece friend or foe?
+                    //don't have the capability of determining this yet because friend/foe is relative to who's turn it is and I don't have the programmed out yet
+
+                    //return potential moves
+                    currentPotentialMoves = returnPotentialMoves(clickedSquare);
+
+                    // color squares of potential moves
+                    displayPotentialMoves(currentPotentialMoves);
+
+                    // this is for testing and can be removed
+                    Debug.WriteLine(clickedSquare.squareArrayRow.ToString() + "," + clickedSquare.squareArrayCol.ToString());
+
+                }
+
+                // else if it is an empty square, do nothing
+                else
+                {
+                    Debug.WriteLine(clickedSquare.squareArrayRow.ToString() + "," + clickedSquare.squareArrayCol.ToString());
+                }
+
 
             }
 
-            ChessboardSquare theSender = ((ChessboardSquare)sender);
+            //ChessboardSquare theSender = ((ChessboardSquare)sender);
 
-                // if the chessboard square clicked has no chesspiece skip over code
-            if(theSender.squareChessPiece == null)
-            {
+            //    // if the chessboard square clicked has no chesspiece skip over code
+            //if(theSender.squareChessPiece == null)
+            //{
                 
-            }
-                //if chesspiece exists on this square run the codez!
-            else
-            { 
+            //}
+            //    //if chesspiece exists on this square run the codez!
+            //else
+            //{ 
                 
-                //return potential moves
-                currentPotentialMoves = returnPotentialMoves(theSender);
-
-                //color squares of potential moves
-                displayPotentialMoves(currentPotentialMoves);
-
-                Debug.WriteLine(theSender.squareArrayRow.ToString() + "," + theSender.squareArrayCol.ToString());
+                
 
                 
 
 
-            }
+            //}
 
         } //end picturebox clicked event
 
@@ -805,6 +805,26 @@ namespace ChessGame
             return isMove;
         }
 
+        // THIS METHOD IS CALLED ANYTIME A CHESSPEICE IS MOVED
+        public void movePiece(ChessboardSquare previousSquare, ChessboardSquare newSquare)
+        {
+
+            // set the newsquare's chesspiece = to the new chesspiece
+            newSquare.squareChessPiece = previousSquare.squareChessPiece;
+
+            // set the newsquare's image to the appropriate image
+            placePiece(newSquare.boardLocation.X, newSquare.boardLocation.Y, previousSquare.squareChessPiece);
+            
+            // take the current board location data from the square, and set that square on the board to null
+            previousSquare.squareChessPiece = null;
+
+        }
+
+        // THIS METHOD IS 
+        public void takePiece()
+        {
+
+        }
 
     }
 }
