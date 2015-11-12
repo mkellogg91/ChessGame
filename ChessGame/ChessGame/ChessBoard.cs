@@ -20,6 +20,7 @@ namespace ChessGame
         public List<ChessPiece> blackPieces { get; set; }
         private List<Point> currentPotentialMoves;
         public bool isMoveClick = false;
+        public ChessboardSquare previousClickedSquare = null;
 
         private int boardX;
         private int boardY;
@@ -209,6 +210,7 @@ namespace ChessGame
         void pictureBox_Clicked(object sender, EventArgs e)
         {
             ChessboardSquare clickedSquare = (ChessboardSquare)sender;
+
             
             // determine if this click is a move click or display potential move click
             isMoveClick = isMoveClickCheck(clickedSquare, currentPotentialMoves);
@@ -227,9 +229,13 @@ namespace ChessGame
                         // add to takenPieces list
 
                     // move the piece (work on all the changes that have to be made on piece move in piece move method)    
-
+                    movePiece(previousClickedSquare, clickedSquare);
                 }
-
+                // if no piece needs to be taken, then just move the piece there
+                else
+                {
+                    movePiece(previousClickedSquare, clickedSquare);
+                }
                 
                 
             }
@@ -247,7 +253,7 @@ namespace ChessGame
                 if(clickedSquare.squareChessPiece != null)
                 {
                     // if so is the piece friend or foe?
-                    //don't have the capability of determining this yet because friend/foe is relative to who's turn it is and I don't have the programmed out yet
+                    //don't have the capability of determining this yet because friend/foe is relative to who's turn it is and I don't have that programmed out yet
 
                     //return potential moves
                     currentPotentialMoves = returnPotentialMoves(clickedSquare);
@@ -269,23 +275,8 @@ namespace ChessGame
 
             }
 
-            //ChessboardSquare theSender = ((ChessboardSquare)sender);
-
-            //    // if the chessboard square clicked has no chesspiece skip over code
-            //if(theSender.squareChessPiece == null)
-            //{
-                
-            //}
-            //    //if chesspiece exists on this square run the codez!
-            //else
-            //{ 
-                
-                
-
-                
-
-
-            //}
+            // set the previousClickedSquare = clickedSquare
+            previousClickedSquare = clickedSquare;
 
         } //end picturebox clicked event
 
@@ -684,6 +675,7 @@ namespace ChessGame
                             // don't add to potential move list
                         }
 
+                        // SOMETHING WRONG THIS THIS LOGIC
                         // if chess piece color is different, this square can be added to potential move list
                         else if (chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece.pieceColor != clickedPieceColor)
                         {
@@ -814,9 +806,15 @@ namespace ChessGame
 
             // set the newsquare's image to the appropriate image
             placePiece(newSquare.boardLocation.X, newSquare.boardLocation.Y, previousSquare.squareChessPiece);
-            
+
+            // set previous square's image = null
+            chessboardSquareArray[previousSquare.boardLocation.X, previousSquare.boardLocation.Y].Image = null;
+
             // take the current board location data from the square, and set that square on the board to null
+            newSquare.squareChessPiece = previousSquare.squareChessPiece;
             previousSquare.squareChessPiece = null;
+
+            //
 
         }
 
