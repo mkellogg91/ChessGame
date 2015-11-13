@@ -349,11 +349,13 @@ namespace ChessGame
                     innerLoopEnd = 7;
                 }
 
-                // innter loop ends once we hit another piece or the boarder's edge
+                // ensure inner iterator is getting reset on each iteration
+                innerIterator = 0;
+                // inner loop ends once we hit another piece or the boarder's edge
                 do
                 {
                     // set movePoint variable to null at the top of each iteration
-
+                    
                     movePoint = new Point(0, 0);
                     canBeAdded = true;
                   
@@ -657,7 +659,16 @@ namespace ChessGame
                     // check if we are outside the bounds of the board, if so, break
                     if (isOutOfBounds(movePoint))
                     {
-                        // do nothing
+                        if (clickedPiece == typeof(HorsemanPiece) || clickedPiece == typeof(PawnPiece))
+                        {
+                            // do nothing since these pieces use the inner iterator only
+                        }
+                        // if any other piece we want to break out of the inner loop, because we can move on to a different direction
+                        else
+                        {
+                            break;
+                        }
+
                     }
                     // if there is a special circumstance that prevents move from being added, stop here
                     else if (!canBeAdded)
@@ -676,14 +687,22 @@ namespace ChessGame
                         }
 
                         // SOMETHING WRONG THIS THIS LOGIC
-                        // if chess piece color is different, this square can be added to potential move list
+                        // if chess piece color is different then we can take that piece, this square can be added to potential move list
                         else if (chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece.pieceColor != clickedPieceColor)
                         {
                             // add to potential move list
                             potentialMoveList.Add(movePoint);
 
-                            // iterate to next move direction
-                            break;  // break out of the loop
+                            if (clickedPiece == typeof(HorsemanPiece) || clickedPiece == typeof(PawnPiece))
+                            {
+                                // don't break from loop if this is a knight
+                            }
+                            else
+                            {
+                                // iterate to next move direction
+                                break;  // break out of the loop
+                            }
+                            
 
 
                         }

@@ -34,7 +34,7 @@ namespace ChessGame
 
         public override Point upMove(Point startingPoint, int numberOfRuns)
         {
-            for (int x = 0; x < numberOfRuns; x++)
+            for (int x = pieceMoveDirectionIterator; x < numberOfRuns; x++)
             {
                 startingPoint.X -= 1;
             }
@@ -49,7 +49,7 @@ namespace ChessGame
 
         public override Point leftMove(Point startingPoint, int numberOfRuns)
         {
-            for (int x = 0; x < numberOfRuns; x++)
+            for (int x = pieceMoveDirectionIterator; x < numberOfRuns; x++)
             {
                 startingPoint.Y -= 1;
             }
@@ -59,7 +59,7 @@ namespace ChessGame
 
         public override Point rightMove(Point startingPoint, int numberOfRuns)
         {
-            for (int x = 0; x < numberOfRuns; x++)
+            for (int x = pieceMoveDirectionIterator; x < numberOfRuns; x++)
             {
                 startingPoint.Y += 1;
             }
@@ -74,7 +74,7 @@ namespace ChessGame
 
         public override Point downMove(Point startingPoint, int numberOfRuns)
         {
-            for (int x = 0; x < numberOfRuns; x++)
+            for (int x = pieceMoveDirectionIterator; x < numberOfRuns; x++)
             {
                 startingPoint.X += 1;
             }
