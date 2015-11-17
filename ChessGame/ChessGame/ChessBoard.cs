@@ -21,6 +21,7 @@ namespace ChessGame
         private List<Point> currentPotentialMoves;
         public bool isMoveClick = false;
         public ChessboardSquare previousClickedSquare = null;
+        public List<ChessPiece> takenList = new List<ChessPiece>();
 
         private int boardX;
         private int boardY;
@@ -224,9 +225,8 @@ namespace ChessGame
                 // is an enemy piece present on this spot? if so take it
                 if(clickedSquare.squareChessPiece != null)
                 {
-                    // work on takePiece method
-                        // remove piece from the board
-                        // add to takenPieces list
+                    // remove piece from the board
+                    takePiece(clickedSquare);
 
                     // move the piece (work on all the changes that have to be made on piece move in piece move method)    
                     movePiece(previousClickedSquare, clickedSquare);
@@ -820,7 +820,7 @@ namespace ChessGame
         public void movePiece(ChessboardSquare previousSquare, ChessboardSquare newSquare)
         {
 
-            // set the newsquare's chesspiece = to the new chesspiece
+            // set the newsquare's chesspiece = to the previousSquare's chesspiece
             newSquare.squareChessPiece = previousSquare.squareChessPiece;
 
             // set the newsquare's image to the appropriate image
@@ -829,18 +829,21 @@ namespace ChessGame
             // set previous square's image = null
             chessboardSquareArray[previousSquare.boardLocation.X, previousSquare.boardLocation.Y].Image = null;
 
-            // take the current board location data from the square, and set that square on the board to null
-            newSquare.squareChessPiece = previousSquare.squareChessPiece;
+            //  set the previous square on the board to null
             previousSquare.squareChessPiece = null;
-
-            //
 
         }
 
-        // THIS METHOD IS 
-        public void takePiece()
+        // THIS METHOD IS FOR WHEN AN ENEMY PIECE IS TAKEN
+        public void takePiece(ChessboardSquare takenPieceSquare)
         {
+            // add to takenPieces list
+            takenList.Add(takenPieceSquare.squareChessPiece);
 
+            // set the square's chessspiece to null before it gets reset
+            takenPieceSquare.squareChessPiece = null;
+            
+            // display in side square, or just write in a string?
         }
 
     }
