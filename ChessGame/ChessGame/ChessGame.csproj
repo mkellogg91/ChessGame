@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIPlayer.cs" />
+    <Compile Include="HumanPlayer.cs" />
     <Compile Include="newChessGame.cs" />
     <Compile Include="piecesTakenHolder.cs" />
     <Compile Include="Pieces\BishopPiece.cs" />

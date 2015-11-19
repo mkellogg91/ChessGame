@@ -8,8 +8,15 @@ namespace ChessGame
 {
     class Player
     {
+            // bool representing if it is player's turn
+        public bool isPlayerTurn { get; set; }
 
-
+        // Constructor
+        public Player()
+        {
+            // set player turn to false by default
+            isPlayerTurn = false;
+        }
 
     }
 }

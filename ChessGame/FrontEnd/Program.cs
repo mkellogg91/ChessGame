@@ -24,12 +24,22 @@ namespace FrontEnd
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            bool checkMate = false;
+
             myChessForm = new chessForm();
                 // add chessBoardPanel to the form from chessBoard class
             myChessForm.Controls.Add(myChessForm.formChessGame.chessBoard.chessboardPanel);
             myChessForm.formChessGame.chessBoard.chessboardPanel.Size = new Size(myChessForm.Width, myChessForm.Height);
 
             Application.Run(myChessForm);
+
+            // keep the game loop going until checkmate = true
+
+            // if checkmate = true
+            
+                // display game over menu   
+
+           
 
         }
     }
