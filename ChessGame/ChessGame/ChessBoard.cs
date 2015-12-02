@@ -22,6 +22,7 @@ namespace ChessGame
         public bool isMoveClick = false;
         public ChessboardSquare previousClickedSquare = null;
         public List<ChessPiece> takenList = new List<ChessPiece>();
+        public PlayerTurn boardTurn { get; set; }
 
         private int boardX;
         private int boardY;
@@ -30,8 +31,10 @@ namespace ChessGame
         // CONSTRUCTOR HERE
         public ChessBoard()
         {
+            // creates chess pieces
             initialize();
 
+            boardTurn = new PlayerTurn();
             chessboardPanel = new Panel();
             chessboardPanel.BackColor = Color.Beige;
             boardX = 10;
@@ -212,9 +215,36 @@ namespace ChessGame
         {
             ChessboardSquare clickedSquare = (ChessboardSquare)sender;
 
-            
             // determine if this click is a move click or display potential move click
             isMoveClick = isMoveClickCheck(clickedSquare, currentPotentialMoves);
+
+            // if not a move click and chesspiece is null don't do anything
+            if (!isMoveClick && clickedSquare.squareChessPiece == null)
+            {
+                unDisplayPotentialMoves(currentPotentialMoves);
+                return;
+            }
+            // if it is a move click and chess square is empty, continue
+            else if (isMoveClick && clickedSquare.squareChessPiece == null)
+            {
+                // good to continue
+            }
+            // if this is a moveclick (not displaymoves click) and the piece colors don't match, continue
+            else if (isMoveClick && clickedSquare.squareChessPiece.pieceColor != boardTurn.colorPlayerTurn)
+            {
+                // good to continue
+            }
+            // if this is not a moveclick and the piece colors of clicked piece and piece who's turn it is match, continue
+            else if (!isMoveClick && clickedSquare.squareChessPiece.pieceColor == boardTurn.colorPlayerTurn)
+            {
+                // good to continue
+            }
+            // if neither of the 2 above are true don't do anything
+            else
+            {
+
+                return;
+            }
 
             // if the square clicked is a square that exists in the potential move list from the previous click, move the piece 
             if (isMoveClick)
@@ -282,17 +312,7 @@ namespace ChessGame
 
 
 
-        public void placePiece(int col, int row, ChessPiece chessPiece)
-        {
-
-                // set square's image box = chessPiece's image
-            chessboardSquareArray[col, row].Image = chessPiece.chesspieceImage;
-                //center image in picturebox
-            chessboardSquareArray[col, row].SizeMode = PictureBoxSizeMode.CenterImage;
-                //set Square's chessPiece property to the passed in chessPiece
-            chessboardSquareArray[col, row].squareChessPiece = chessPiece;
-
-        }
+        
 
 
 
@@ -831,6 +851,26 @@ namespace ChessGame
 
             //  set the previous square on the board to null
             previousSquare.squareChessPiece = null;
+
+            // switch turn to other player!
+            boardTurn.switchTurns();
+
+        }
+
+        public void placePiece(int col, int row, ChessPiece chessPiece)
+        {
+            // if the chesspiece is null don't do anything
+            //if (chessPiece == null)
+            //{
+            //    return;
+            //}
+
+            // set square's image box = chessPiece's image
+            chessboardSquareArray[col, row].Image = chessPiece.chesspieceImage;
+            //center image in picturebox
+            chessboardSquareArray[col, row].SizeMode = PictureBoxSizeMode.CenterImage;
+            //set Square's chessPiece property to the passed in chessPiece
+            chessboardSquareArray[col, row].squareChessPiece = chessPiece;
 
         }
 

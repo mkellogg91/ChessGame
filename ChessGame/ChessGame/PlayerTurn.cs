@@ -6,17 +6,35 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    class PlayerTurn
+    public class PlayerTurn
     {
 
         public bool hasMoved { get; set; }
-
+        public int colorPlayerTurn { get; set; }
 
         // Constructor!!
         public PlayerTurn()
         {
             // set hasMoved to false by default
             hasMoved = false;
+
+            // by default white player goes first, white = 0, black = 1
+            colorPlayerTurn = 0;
+        }
+
+        // this switches turn from black player to white player and vice versa
+        public int switchTurns()
+        {
+            if(colorPlayerTurn == 0)
+            {
+                colorPlayerTurn = 1;
+            }
+            else if(colorPlayerTurn == 1)
+            {
+                colorPlayerTurn = 0;
+            }
+
+            return colorPlayerTurn;
         }
 
         public bool kingCheckChecker()
@@ -30,6 +48,5 @@ namespace ChessGame
             // return bool result
             return kingInCheck;
         }
-
     }
 }
