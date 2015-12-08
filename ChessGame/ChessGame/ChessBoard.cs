@@ -19,7 +19,8 @@ namespace ChessGame
         public List<ChessPiece>whitePieces { get; set; }
         public List<ChessPiece> blackPieces { get; set; }
         private List<Point> currentPotentialMoves;
-        public bool isMoveClick = false;
+        public bool isMoveClick { get; set; }
+        public bool playerTurnChecked { get; set; }
         public ChessboardSquare previousClickedSquare = null;
         public List<ChessPiece> takenList = new List<ChessPiece>();
         public PlayerTurn boardTurn { get; set; }
@@ -34,6 +35,8 @@ namespace ChessGame
             // creates chess pieces
             initialize();
 
+            isMoveClick = false;
+            playerTurnChecked = false;
             boardTurn = new PlayerTurn();
             chessboardPanel = new Panel();
             chessboardPanel.BackColor = Color.Beige;
@@ -218,31 +221,12 @@ namespace ChessGame
             // determine if this click is a move click or display potential move click
             isMoveClick = isMoveClickCheck(clickedSquare, currentPotentialMoves);
 
-            // if not a move click and chesspiece is null don't do anything
-            if (!isMoveClick && clickedSquare.squareChessPiece == null)
-            {
-                unDisplayPotentialMoves(currentPotentialMoves);
-                return;
-            }
-            // if it is a move click and chess square is empty, continue
-            else if (isMoveClick && clickedSquare.squareChessPiece == null)
-            {
-                // good to continue
-            }
-            // if this is a moveclick (not displaymoves click) and the piece colors don't match, continue
-            else if (isMoveClick && clickedSquare.squareChessPiece.pieceColor != boardTurn.colorPlayerTurn)
-            {
-                // good to continue
-            }
-            // if this is not a moveclick and the piece colors of clicked piece and piece who's turn it is match, continue
-            else if (!isMoveClick && clickedSquare.squareChessPiece.pieceColor == boardTurn.colorPlayerTurn)
-            {
-                // good to continue
-            }
-            // if neither of the 2 above are true don't do anything
-            else
-            {
+            // check if the player turn matches the pieces clicked
+            playerTurnChecked = isPlayerTurnChecked(clickedSquare);
 
+            // if player turn doesn't match don't continue
+            if(!playerTurnChecked)
+            {
                 return;
             }
 
@@ -836,6 +820,43 @@ namespace ChessGame
             return isMove;
         }
 
+        public bool isPlayerTurnChecked(ChessboardSquare theClickedSquare)
+        {
+            bool theBool = false;
+
+            // if not a move click and chesspiece is null don't do anything
+            if (!isMoveClick && theClickedSquare.squareChessPiece == null)
+            {
+                unDisplayPotentialMoves(currentPotentialMoves);
+                theBool = false;
+            }
+            // if it is a move click and chess square is empty, continue
+            else if (isMoveClick && theClickedSquare.squareChessPiece == null)
+            {
+                // good to continue
+                theBool = true;
+            }
+            // if this is a moveclick (not displaymoves click) and the piece colors don't match, continue
+            else if (isMoveClick && theClickedSquare.squareChessPiece.pieceColor != boardTurn.colorPlayerTurn)
+            {
+                // good to continue
+                theBool = true;
+            }
+            // if this is not a moveclick and the piece colors of clicked piece and piece who's turn it is match, continue
+            else if (!isMoveClick && theClickedSquare.squareChessPiece.pieceColor == boardTurn.colorPlayerTurn)
+            {
+                // good to continue
+                theBool = true;
+            }
+            // if neither of the 2 above are true don't do anything
+            else
+            {
+                theBool = false;
+            }
+
+            return theBool;
+        }
+
         // THIS METHOD IS CALLED ANYTIME A CHESSPEICE IS MOVED
         public void movePiece(ChessboardSquare previousSquare, ChessboardSquare newSquare)
         {
@@ -854,6 +875,9 @@ namespace ChessGame
 
             // switch turn to other player!
             boardTurn.switchTurns();
+
+            // clear the potential move list to avoid errors after this player's turn
+            currentPotentialMoves.Clear();
 
         }
 
