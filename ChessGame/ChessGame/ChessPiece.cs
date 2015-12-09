@@ -17,12 +17,14 @@ namespace ChessGame
         public int pieceColor { get; set; }         // 0 = WHITE    1 = BLACK
         public bool isValidMove { get; set; }
         public const int pieceMoveDirectionIterator = -1;
+        public bool isTaken { get; set; }
 
         
         // CONSTRUCTOR!!!           TAKES A COLOR PARAMETER
         public ChessPiece(int color)
         {
             pieceColor = color;
+            isTaken = false;
         }
 
         // METHODS

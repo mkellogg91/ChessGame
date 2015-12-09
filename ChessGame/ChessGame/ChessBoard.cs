@@ -906,8 +906,74 @@ namespace ChessGame
 
             // set the square's chessspiece to null before it gets reset
             takenPieceSquare.squareChessPiece = null;
-            
+
+            // set isTaken property = true
+            takenPieceSquare.squareChessPiece.isTaken = true;
+
             // display in side square, or just write in a string?
+        }
+
+        public bool isInCheck()
+        {
+            bool inCheck = false;
+
+            // TOOLS TO GATHER:
+            // 1. LIST OF ALL POTENTIAL MOVES OF ENEMY PLAYERS
+            // 2. LIST OF POTENTIAL MOVES OF THE CORRECT KING PIECE
+            // 3. CURRENT PLAYER TURN
+            List<Point> kingMoveList = new List<Point>();
+            List<Point> enemyMoveList = new List<Point>();
+
+            // determine if it is black/white player's turn
+            
+            // locate the king piece for this player via the kinglocator method
+
+            // loop through each square on the chessboard and run "returnPotentialMoves" for each
+
+                // check if the square has a chesspiece, if not skip to next square
+
+                // check if the chesspiece is the color of the current player's turn (it should be the opposite color)
+
+                    // if it is the opposite color, append the potential moves to the enemy player move list
+
+            return inCheck;
+        }
+
+        public Point kingLocator(List<ChessboardSquare> squareList, int kingColor)
+        {
+            Point kingLocation;
+            Object pieceObjectType;
+
+            // look at each square to determine if it is the correct king or not
+            foreach(ChessboardSquare square in squareList)
+            {
+                pieceObjectType = square.squareChessPiece.GetType();
+
+                // if square has no chesspiece skip to next square
+                if(square.squareChessPiece != null)
+                {
+                    // if chesspiece does not match the given color skip to next square
+                    if(square.squareChessPiece.pieceColor == kingColor)
+                    {
+                        // if piecetype is king grab the board location data
+                        if(pieceObjectType == typeof(KingPiece))
+                        {
+                            kingLocation = new Point(square.boardLocation.X, square.boardLocation.Y);
+                        }
+                    }
+
+
+                }
+                else
+                {
+                    //nothing
+                }
+
+                    
+
+            }
+
+            return kingLocation;
         }
 
     }
