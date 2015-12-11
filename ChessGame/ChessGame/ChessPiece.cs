@@ -18,6 +18,7 @@ namespace ChessGame
         public bool isValidMove { get; set; }
         public const int pieceMoveDirectionIterator = -1;
         public bool isTaken { get; set; }
+        public Point pieceBoardLocation { get; set; }
 
         
         // CONSTRUCTOR!!!           TAKES A COLOR PARAMETER
@@ -25,6 +26,7 @@ namespace ChessGame
         {
             pieceColor = color;
             isTaken = false;
+            pieceBoardLocation = new Point();
         }
 
         // METHODS
