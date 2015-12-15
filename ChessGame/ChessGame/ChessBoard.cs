@@ -21,6 +21,8 @@ namespace ChessGame
         private List<Point> currentPotentialMoves;
         public bool isMoveClick { get; set; }
         public bool playerTurnChecked { get; set; }
+        public bool kingInCheck { get; set; }
+        public bool kingInCheckMate { get; set; }
         public ChessboardSquare previousClickedSquare = null;
         public List<ChessPiece> takenList = new List<ChessPiece>();
         public PlayerTurn boardTurn { get; set; }
@@ -257,8 +259,11 @@ namespace ChessGame
             // else if this is not a move click
             else
             {
+                // check if player king is in check
+                kingInCheck = isInCheck();
+
                 // remove previous hilighted squares
-                if(currentPotentialMoves != null)
+                if (currentPotentialMoves != null)
                 {
                     unDisplayPotentialMoves(currentPotentialMoves);
                 }
@@ -909,44 +914,95 @@ namespace ChessGame
             // add to takenPieces list
             takenList.Add(takenPieceSquare.squareChessPiece);
 
-            // set the square's chessspiece to null before it gets reset
-            takenPieceSquare.squareChessPiece = null;
-
             // set isTaken property = true
             takenPieceSquare.squareChessPiece.isTaken = true;
+
+            // set the square's chessspiece to null before it gets reset
+            takenPieceSquare.squareChessPiece = null;
 
             // display in side square, or just write in a string?
         }
 
         public bool isInCheck()
         {
+            
             bool inCheck = false;
+
 
             // TOOLS TO GATHER:
             // 1. LIST OF ALL POTENTIAL MOVES OF ENEMY PLAYERS
             // 2. LIST OF POTENTIAL MOVES OF THE CORRECT KING PIECE
             // 3. CURRENT PLAYER TURN
-            List<Point> kingMoveList = new List<Point>();
-            List<Point> enemyMoveList = new List<Point>();
-            List<Point> tempMoveList = new List<Point>();
-            List<ChessPiece> currentTurnList = new List<ChessPiece>();
+            
+            List<Point> enemyPlayerMoveList = new List<Point>();                // all potential enemy moves
+            List<Point> currentPlayerMoveList = new List<Point>();              // all potential current player moves
+            
+            List<ChessPiece> currentTurnList = new List<ChessPiece>();          // all current player's piece objects
+            List<ChessPiece> enemyList = new List<ChessPiece>();                // all enemy player's piece objects
 
-            // determine if it is black/white player's turn and set currentList = to the opposite
-            if(boardTurn.colorPlayerTurn == 0)
+            // determine if it is black/white player's turn and set enemyList = to the opposite
+            if (boardTurn.colorPlayerTurn == 0)
             {
-                currentTurnList = blackPieces;
+                enemyList = blackPieces;
+                currentTurnList = whitePieces;
             }
             else
             {
-                currentTurnList = whitePieces;
+                enemyList = whitePieces;
+                currentTurnList = blackPieces;
             }
-            
 
-            // loop through each chesspiece in the piecelist and run "returnPotentialMoves" for each
-            foreach(ChessPiece piece in currentTurnList)
+
+            // fetch all potential moves for currentPlayerMoveLIst
+            currentPlayerMoveList = returnAllPlayerMoves(currentTurnList);
+
+            // fetch all potential moves for enemyPlayerMoveList
+            enemyPlayerMoveList = returnAllPlayerMoves(enemyList);
+
+
+            // check if the kingpiece's location exsists in the enemyPlayerMoveList
+            //bool has = list.Any(cus => cus.FirstName == "John");
+
+            Point kingLocation = currentTurnList[0].pieceBoardLocation;
+
+            inCheck = enemyPlayerMoveList.Contains(kingLocation);
+
+                // check if king is in checkmate if king is in check
+            if(inCheck)
+            {
+                // lock piece movement until king out of check (bool var that check if in check then checks what resulting moves will get king out of check)
+
+                // check if king is in checkmate
+                kingInCheck = canGetOutOfCheck(enemyPlayerMoveList);
+                
+            }
+            else
+            {
+                // just return the check result
+            }
+
+            return inCheck;
+        }
+
+        public bool canGetOutOfCheck(List<Point>enemyMoves)
+        {
+            bool inCheckMate = false;
+            List<Point> kingMoveList = new List<Point>();
+
+
+            return inCheckMate;
+
+        }
+
+        public List<Point> returnAllPlayerMoves(List<ChessPiece> playerPieces)
+        {
+            List<Point> tempMoveList = new List<Point>();                       // temporary list for moving data
+            List<Point> result = new List<Point>();
+
+            foreach (ChessPiece piece in playerPieces)
             {
                 // check if the isTaken property = false
-                if(piece.isTaken)
+                if (piece.isTaken)
                 {
                     // do nothing
                 }
@@ -955,28 +1011,14 @@ namespace ChessGame
                     // call returnPotentialMoves using pieceboard location to pass in a chessboard square
                     tempMoveList = returnPotentialMoves(chessboardSquareArray[piece.pieceBoardLocation.X, piece.pieceBoardLocation.Y]);
 
-                    // append the potential moves to the enemyMoveList
-                    enemyMoveList.AddRange(tempMoveList);
+                    // append the potential moves to the enemyPlayerMoveList
+                    result.AddRange(tempMoveList);
                 }
+            } // end foreach
 
-            }
+            return result;
 
-            // check if the kingpiece's location exsists in the enemyMoveList
-
-                // if it does set check = true
-
-                // now check if king is in checkmate
-
-
-
-
-
-
-
-            return inCheck;
-        }
-
-        
+        } // end returnAllPlayerMoves
 
     }
 }
