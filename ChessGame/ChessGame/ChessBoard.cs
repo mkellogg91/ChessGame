@@ -695,7 +695,7 @@ namespace ChessGame
                             // don't add to potential move list
                         }
 
-                        // SOMETHING WRONG THIS THIS LOGIC
+                  
                         // if chess piece color is different then we can take that piece, this square can be added to potential move list
                         else if (chessboardSquareArray[movePoint.X, movePoint.Y].squareChessPiece.pieceColor != clickedPieceColor)
                         {
@@ -984,16 +984,44 @@ namespace ChessGame
             return inCheck;
         }
 
+        /// <summary>
+        /// checks if the king who's turn it is can get out of check
+        /// </summary>
+        /// <param name="enemyMoves"></param>
+        /// <returns></returns>
         public bool canGetOutOfCheck(List<Point>enemyMoves)
         {
             bool inCheckMate = false;
             List<Point> kingMoveList = new List<Point>();
 
+            // need a conclusive way to find out if player king can get out of check via 1. moving 2. other piece blocking 3. other piece taking piece putting king in check
 
             return inCheckMate;
 
-        }
+                    // POTENTIAL SOLUTION (PROBABLY HEAVY)
+            
+            // check every potential ally move to see if king is no longer in check once it has been made (would need some way to do this virtually without actually moving pieces)
 
+            // only executed if king is currently in check
+
+            // maybe use a temporary chesspiece object, actually place it in the position where the move would occur
+
+            // remove the chesspiece 
+            
+            // run isInCheck method again
+
+            // if true put pieces back and remove temporary chesspiece object again
+
+
+
+        }
+            
+        
+            /// <summary>
+            /// this returns all potential moves for a list of pieces
+            /// </summary>
+            /// <param name="playerPieces"></param>
+            /// <returns></returns>
         public List<Point> returnAllPlayerMoves(List<ChessPiece> playerPieces)
         {
             List<Point> tempMoveList = new List<Point>();                       // temporary list for moving data
