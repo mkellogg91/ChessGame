@@ -953,17 +953,16 @@ namespace ChessGame
             }
 
 
+            // check if the kingpiece's location exsists in the enemyPlayerMoveList
+            ChessPiece kingPiece = currentTurnList[0];
+            Point kingLocation = kingPiece.pieceBoardLocation;
+
             // fetch all potential moves for currentPlayerMoveLIst
-            currentPlayerMoveList = returnAllPlayerMoves(currentTurnList);
+            currentPlayerMoveList = returnAllPlayerMoves(currentTurnList, false, kingLocation);
 
             // fetch all potential moves for enemyPlayerMoveList
-            enemyPlayerMoveList = returnAllPlayerMoves(enemyList);
+            enemyPlayerMoveList = returnAllPlayerMoves(enemyList, true, kingLocation);
 
-
-            // check if the kingpiece's location exsists in the enemyPlayerMoveList
-            //bool has = list.Any(cus => cus.FirstName == "John");
-
-            Point kingLocation = currentTurnList[0].pieceBoardLocation;
 
             inCheck = enemyPlayerMoveList.Contains(kingLocation);
 
@@ -973,7 +972,7 @@ namespace ChessGame
                 // lock piece movement until king out of check (bool var that check if in check then checks what resulting moves will get king out of check)
 
                 // check if king is in checkmate
-                kingInCheck = canGetOutOfCheck(enemyPlayerMoveList);
+                kingInCheck = canGetOutOfCheck(enemyPlayerMoveList, kingLocation);
                 
             }
             else
@@ -989,40 +988,82 @@ namespace ChessGame
         /// </summary>
         /// <param name="enemyMoves"></param>
         /// <returns></returns>
-        public bool canGetOutOfCheck(List<Point>enemyMoves)
+        public bool canGetOutOfCheck(List<Point>enemyMoves, Point kingLocation)
         {
-            bool inCheckMate = false;
+            bool kingCanMoveVar = false;
+            bool checkCanBeBlocked = false;
+            bool checkPieceCanBeTaken = false;
+
+            bool canGetOutOfCheck = false;
+            
             List<Point> kingMoveList = new List<Point>();
 
-            // need a conclusive way to find out if player king can get out of check via 1. moving 2. other piece blocking 3. other piece taking piece putting king in check
+            // make sure king potential move list is clear 
+            kingMoveList.Clear();
 
-            return inCheckMate;
+            // potential moves of kingpiece
+            kingMoveList = returnPotentialMoves(chessboardSquareArray[kingLocation.X, kingLocation.Y]);
 
-                    // POTENTIAL SOLUTION (PROBABLY HEAVY)
-            
-            // check every potential ally move to see if king is no longer in check once it has been made (would need some way to do this virtually without actually moving pieces)
+            // check 3 potential ways of getting out of check:
 
-            // only executed if king is currently in check
+            // 1. moving king piece to a non-check square
+            // 1a.need to check if any potential king moves don't exist in the list of all enemy moves
 
-            // maybe use a temporary chesspiece object, actually place it in the position where the move would occur
-
-            // remove the chesspiece 
-            
-            // run isInCheck method again
-
-            // if true put pieces back and remove temporary chesspiece object again
+            kingCanMoveVar = kingCanMove(enemyMoves, kingMoveList);
+            if(kingCanMoveVar)
+            {
+                canGetOutOfCheck = true;
+                return canGetOutOfCheck;
+            }
 
 
+            // 2. if can't move out, can a friendly piece block check
+
+
+            // 3. also can pieces that have king in check be taken?
+
+            return canGetOutOfCheck;
 
         }
             
+        /// <summary>
+        /// checks if the king piece can move out of check
+        /// </summary>
+        /// <param name="enemyMoves"></param>
+        /// <param name="kingMoves"></param>
+        /// <returns></returns>
+        bool kingCanMove(List<Point> enemyMoves, List<Point> kingMoves)
+        {
+            return (kingMoves.Except(enemyMoves).Any());
+        }
+
+
+        bool canBlockCheck()
+        {
+            bool canBlock = false;
+
+
+            return canBlock;
+        }
+
+
+        bool canTakeCheckPiece()
+        {
+            bool canTake = false;
+
+
+            return canTake;
+        }
+
         
-            /// <summary>
-            /// this returns all potential moves for a list of pieces
-            /// </summary>
-            /// <param name="playerPieces"></param>
-            /// <returns></returns>
-        public List<Point> returnAllPlayerMoves(List<ChessPiece> playerPieces)
+        /// <summary>
+        /// -this returns all potential moves for a list of pieces 
+        /// -also takes a bool parameter that determines if it is an enemy list
+        /// -takes a king location variable necessary for enemy list
+        /// </summary>
+        /// <param name="playerPieces"></param>
+        /// <returns></returns>
+        public List<Point> returnAllPlayerMoves(List<ChessPiece> playerPieces, bool isEnemy, Point kingLocation)
         {
             List<Point> tempMoveList = new List<Point>();                       // temporary list for moving data
             List<Point> result = new List<Point>();
@@ -1038,6 +1079,13 @@ namespace ChessGame
                 {
                     // call returnPotentialMoves using pieceboard location to pass in a chessboard square
                     tempMoveList = returnPotentialMoves(chessboardSquareArray[piece.pieceBoardLocation.X, piece.pieceBoardLocation.Y]);
+
+                    // only check if pieces have king in check if the list provided is enemy list
+                    if(isEnemy)
+                    { 
+                        // check if this indivual piece has king in check
+                        piece.hasKingInCheck = tempMoveList.Contains(kingLocation);
+                    }
 
                     // append the potential moves to the enemyPlayerMoveList
                     result.AddRange(tempMoveList);

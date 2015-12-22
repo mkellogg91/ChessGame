@@ -19,6 +19,7 @@ namespace ChessGame
         public const int pieceMoveDirectionIterator = -1;
         public bool isTaken { get; set; }
         public Point pieceBoardLocation { get; set; }
+        public bool hasKingInCheck { get; set; }
 
         
         // CONSTRUCTOR!!!           TAKES A COLOR PARAMETER
