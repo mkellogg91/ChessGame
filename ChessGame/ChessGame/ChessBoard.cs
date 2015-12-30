@@ -16,7 +16,7 @@ namespace ChessGame
         // PROPERTIES
         public Panel chessboardPanel { get; set; }
         public ChessboardSquare[,] chessboardSquareArray = new ChessboardSquare[8,8];
-        public List<ChessPiece>whitePieces { get; set; }
+        public List<ChessPiece> whitePieces { get; set; }
         public List<ChessPiece> blackPieces { get; set; }
         private List<Point> currentPotentialMoves;
         public bool isMoveClick { get; set; }
@@ -26,6 +26,8 @@ namespace ChessGame
         public ChessboardSquare previousClickedSquare = null;
         public List<ChessPiece> takenList = new List<ChessPiece>();
         public PlayerTurn boardTurn { get; set; }
+        public List<ChessPiece> checkerPieceList { get; set; }
+
 
         private int boardX;
         private int boardY;
@@ -952,9 +954,25 @@ namespace ChessGame
                 currentTurnList = blackPieces;
             }
 
+            // gather list of chesspieces that have king in check
+            checkerPieceList.Clear();
 
-            // check if the kingpiece's location exsists in the enemyPlayerMoveList
-            ChessPiece kingPiece = currentTurnList[0];
+            foreach (ChessPiece piece in enemyList)
+            {
+                if (piece.hasKingInCheck)
+                {
+                    checkerPieceList.Add(piece);
+                }
+
+                else
+                {
+                    // don't do nuttin!!
+                }
+            }
+
+
+                // check if the kingpiece's location exsists in the enemyPlayerMoveList
+                ChessPiece kingPiece = currentTurnList[0];
             Point kingLocation = kingPiece.pieceBoardLocation;
 
             // fetch all potential moves for currentPlayerMoveLIst
@@ -993,9 +1011,8 @@ namespace ChessGame
             bool kingCanMoveVar = false;
             bool checkCanBeBlocked = false;
             bool checkPieceCanBeTaken = false;
-
             bool canGetOutOfCheck = false;
-            
+
             List<Point> kingMoveList = new List<Point>();
 
             // make sure king potential move list is clear 
@@ -1027,7 +1044,7 @@ namespace ChessGame
         }
             
         /// <summary>
-        /// checks if the king piece can move out of check
+        /// checks if the king piece can move out of check, check 1 of 3
         /// </summary>
         /// <param name="enemyMoves"></param>
         /// <param name="kingMoves"></param>
@@ -1037,16 +1054,49 @@ namespace ChessGame
             return (kingMoves.Except(enemyMoves).Any());
         }
 
-
+        /// <summary>
+        /// checks if check can be blocked for a piece that have king in check, check 2 of 3
+        /// </summary>
+        /// <returns></returns>
         bool canBlockCheck()
         {
             bool canBlock = false;
 
+            // **checkerPieceList contains all enemy chess pieces that have king in check**
+
+            // identify spaces that if a piece were present on, would block check
+
+
+            // check to see if any enemy pieces are able to move onto blocking spaces
+
 
             return canBlock;
         }
+        
+        /// <summary>
+        /// identifies squares between a king and the piece that has it in check that would block "check"
+        /// </summary>
+        /// <returns></returns>
+        List<Point> canBlockCheck_IdentifyBlockers(List<Point> allEnemyMoves, Point kingLocation, ChessPiece checkPiece)
+        {
+            /* 
+                pieces who's "check" cannot be "blocked":
+                -knights
+                -pawns    
+            */
+
+            
+            // look at piece type 
 
 
+            // compare piece that has king in check and king locations
+
+        }
+
+        /// <summary>
+        /// checks if pieces that have king in check can be taken
+        /// </summary>
+        /// <returns></returns>
         bool canTakeCheckPiece()
         {
             bool canTake = false;
