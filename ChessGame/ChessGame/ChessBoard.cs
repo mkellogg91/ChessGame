@@ -955,7 +955,11 @@ namespace ChessGame
             }
 
             // gather list of chesspieces that have king in check
-            checkerPieceList.Clear();
+            if(checkerPieceList != null)
+            {
+                checkerPieceList.Clear();
+            }
+            
 
             foreach (ChessPiece piece in enemyList)
             {
@@ -1077,19 +1081,76 @@ namespace ChessGame
         /// identifies squares between a king and the piece that has it in check that would block "check"
         /// </summary>
         /// <returns></returns>
-        List<Point> canBlockCheck_IdentifyBlockers(List<Point> allEnemyMoves, Point kingLocation, ChessPiece checkPiece)
+        List<Point> canBlockCheck_IdentifyBlockingSquares(List<Point> allEnemyMoves, Point kingLocation, ChessPiece checkPiece)
         {
+            List<Point> returnList = new List<Point>();
+
+            // check piece type for the below pieces
             /* 
                 pieces who's "check" cannot be "blocked":
                 -knights
                 -pawns    
             */
 
-            
-            // look at piece type 
+            // compare piece location that has king in check and king location
+            Point checkerLocation = checkPiece.pieceBoardLocation;
+
+            // determine the direction check is coming from I.E. "diagonal up left" or just "right" (direction is from the perspective of piece putting king in check)
+                
+                // check up
+            if(checkerLocation.Y == kingLocation.Y && checkerLocation.X > kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // check up diag right
+            else if (checkerLocation.Y < kingLocation.Y && checkerLocation.X > kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // check right
+            else if (checkerLocation.Y < kingLocation.Y && checkerLocation.X == kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // check down diag right
+            else if (checkerLocation.Y < kingLocation.Y && checkerLocation.X < kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // check down
+            else if (checkerLocation.Y == kingLocation.Y && checkerLocation.X < kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // check down diag left
+            else if (checkerLocation.Y > kingLocation.Y && checkerLocation.X < kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // check left
+            else if (checkerLocation.Y > kingLocation.Y && checkerLocation.X == kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // check up diag left
+            else if (checkerLocation.Y > kingLocation.Y && checkerLocation.X > kingLocation.X)
+            {
+                //do stuff
+            }
+
+            // count from piece that has king in check back to the king
+
+            // add the squares in between to a list and return them
 
 
-            // compare piece that has king in check and king locations
+            return returnList;
 
         }
 
