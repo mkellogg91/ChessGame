@@ -27,9 +27,13 @@ namespace ChessGame
         public List<ChessPiece> takenList = new List<ChessPiece>();
         public PlayerTurn boardTurn { get; set; }
         public List<ChessPiece> checkerPieceList { get; set; }
+        public List<Point> enemyPlayerMoveList { get; set; }                // all potential enemy moves
+        public List<Point> currentPlayerMoveList { get; set; }              // all potential current player moves
+        public List<ChessPiece> currentTurnList { get; set; }               // all current player's piece objects
+        public List<ChessPiece> enemyList  { get; set; }                    // all enemy player's piece objects
 
 
-        private int boardX;
+    private int boardX;
         private int boardY;
 
 
@@ -936,11 +940,7 @@ namespace ChessGame
             // 2. LIST OF POTENTIAL MOVES OF THE CORRECT KING PIECE
             // 3. CURRENT PLAYER TURN
             
-            List<Point> enemyPlayerMoveList = new List<Point>();                // all potential enemy moves
-            List<Point> currentPlayerMoveList = new List<Point>();              // all potential current player moves
             
-            List<ChessPiece> currentTurnList = new List<ChessPiece>();          // all current player's piece objects
-            List<ChessPiece> enemyList = new List<ChessPiece>();                // all enemy player's piece objects
 
             // determine if it is black/white player's turn and set enemyList = to the opposite
             if (boardTurn.colorPlayerTurn == 0)
@@ -975,8 +975,8 @@ namespace ChessGame
             }
 
 
-                // check if the kingpiece's location exsists in the enemyPlayerMoveList
-                ChessPiece kingPiece = currentTurnList[0];
+            // check if the kingpiece's location exsists in the enemyPlayerMoveList
+            ChessPiece kingPiece = currentTurnList[0];
             Point kingLocation = kingPiece.pieceBoardLocation;
 
             // fetch all potential moves for currentPlayerMoveLIst
@@ -988,7 +988,7 @@ namespace ChessGame
 
             inCheck = enemyPlayerMoveList.Contains(kingLocation);
 
-                // check if king is in checkmate if king is in check
+            // check if king is in checkmate if king is in check
             if(inCheck)
             {
                 // lock piece movement until king out of check (bool var that check if in check then checks what resulting moves will get king out of check)
@@ -1004,6 +1004,8 @@ namespace ChessGame
 
             return inCheck;
         }
+
+        public 
 
         /// <summary>
         /// checks if the king who's turn it is can get out of check
@@ -1066,13 +1068,18 @@ namespace ChessGame
         {
             bool canBlock = false;
 
-            // **checkerPieceList contains all enemy chess pieces that have king in check**
+            List<Point> blockerSquares = new List<Point>();
+           
+            // loop through these checks for each piece that has king in check
+            foreach(ChessPiece piece in checkerPieceList)
+            {
 
-            // identify spaces that if a piece were present on, would block check
+                // identify spaces that if a piece were present on, would block check
+        //blockerSquares = canBlockCheck_IdentifyBlockingSquares()
 
+                // check to see if any enemy pieces are able to move onto blocking spaces
 
-            // check to see if any enemy pieces are able to move onto blocking spaces
-
+            }
 
             return canBlock;
         }
@@ -1081,9 +1088,11 @@ namespace ChessGame
         /// identifies squares between a king and the piece that has it in check that would block "check"
         /// </summary>
         /// <returns></returns>
-        List<Point> canBlockCheck_IdentifyBlockingSquares(List<Point> allEnemyMoves, Point kingLocation, ChessPiece checkPiece)
+        List<Point> canBlockCheck_IdentifyBlockingSquares(List<Point> allAllyMoves, Point kingLocation, ChessPiece checkPiece)
         {
             List<Point> returnList = new List<Point>();
+            int directionVar = 0;
+            Point tempPoint = checkPiece.pieceBoardLocation;
 
             // check piece type for the below pieces
             /* 
@@ -1100,55 +1109,98 @@ namespace ChessGame
                 // check up
             if(checkerLocation.Y == kingLocation.Y && checkerLocation.X > kingLocation.X)
             {
-                //do stuff
+                directionVar = 0;
             }
 
             // check up diag right
             else if (checkerLocation.Y < kingLocation.Y && checkerLocation.X > kingLocation.X)
             {
-                //do stuff
+                directionVar = 1;
             }
 
             // check right
             else if (checkerLocation.Y < kingLocation.Y && checkerLocation.X == kingLocation.X)
             {
-                //do stuff
+                directionVar = 2;
             }
 
             // check down diag right
             else if (checkerLocation.Y < kingLocation.Y && checkerLocation.X < kingLocation.X)
             {
-                //do stuff
+                directionVar = 3;
             }
 
             // check down
             else if (checkerLocation.Y == kingLocation.Y && checkerLocation.X < kingLocation.X)
             {
-                //do stuff
+                directionVar = 4;
             }
 
             // check down diag left
             else if (checkerLocation.Y > kingLocation.Y && checkerLocation.X < kingLocation.X)
             {
-                //do stuff
+                directionVar = 5;
             }
 
             // check left
             else if (checkerLocation.Y > kingLocation.Y && checkerLocation.X == kingLocation.X)
             {
-                //do stuff
+                directionVar = 6;
             }
 
             // check up diag left
             else if (checkerLocation.Y > kingLocation.Y && checkerLocation.X > kingLocation.X)
             {
-                //do stuff
+                directionVar = 7;
             }
 
             // count from piece that has king in check back to the king
 
-            // add the squares in between to a list and return them
-
+            while(tempPoint != kingLocation)
+            {
+                // pass in the directionVar to determine which direction we count back to kingpiece
+                switch(directionVar)
+                {
+                    // up
+                    case 0:
+                        tempPoint.X -= 1;
+                        break;
+                    // up diag right
+                    case 1:
+                        tempPoint.X -= 1;
+                        tempPoint.Y += 1;
+                        break;
+                    // right
+                    case 2:
+                        tempPoint.Y += 1;
+                        break;
+                    // down diag right
+                    case 3:
+                        tempPoint.X += 1;
+                        tempPoint.Y += 1;
+                        break;
+                    // down
+                    case 4:
+                        tempPoint.X += 1;
+                        break;
+                    // down diag left
+                    case 5:
+                        tempPoint.X += 1;
+                        tempPoint.Y -= 1;
+                        break;
+                    // left
+                    case 6:
+                        tempPoint.Y -= 1;
+                        break;
+                    // up diag left
+                    case 7:
+                        tempPoint.X -= 1;
+                        tempPoint.Y -= 1;
+                        break;
+                }
+                // add the squares in between to a list and return them
+                returnList.Add(tempPoint);
+            }
 
             return returnList;
 
