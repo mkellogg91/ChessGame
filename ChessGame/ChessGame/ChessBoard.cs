@@ -31,6 +31,8 @@ namespace ChessGame
         public List<Point> currentPlayerMoveList { get; set; }              // all potential current player moves
         public List<ChessPiece> currentTurnList { get; set; }               // all current player's piece objects
         public List<ChessPiece> enemyList  { get; set; }                    // all enemy player's piece objects
+        public ChessPiece kingPiece { get; set; }                           // temp king piece var
+        public Point kingLocation { get; set; }                             // location of the king who's turn it is currently
 
 
     private int boardX;
@@ -934,33 +936,16 @@ namespace ChessGame
             
             bool inCheck = false;
 
+            // this puts enemy pieces in "enemyList" and allies in "currentTurnList" dynaically for this turn
+            setPieceVariables();
 
-            // TOOLS TO GATHER:
-            // 1. LIST OF ALL POTENTIAL MOVES OF ENEMY PLAYERS
-            // 2. LIST OF POTENTIAL MOVES OF THE CORRECT KING PIECE
-            // 3. CURRENT PLAYER TURN
-            
-            
-
-            // determine if it is black/white player's turn and set enemyList = to the opposite
-            if (boardTurn.colorPlayerTurn == 0)
-            {
-                enemyList = blackPieces;
-                currentTurnList = whitePieces;
-            }
-            else
-            {
-                enemyList = whitePieces;
-                currentTurnList = blackPieces;
-            }
-
-            // gather list of chesspieces that have king in check
+            // clear list if it has any items from before
             if(checkerPieceList != null)
             {
                 checkerPieceList.Clear();
             }
             
-
+            // loops through player list and adds pieces to a list if they have king in check
             foreach (ChessPiece piece in enemyList)
             {
                 if (piece.hasKingInCheck)
@@ -974,18 +959,7 @@ namespace ChessGame
                 }
             }
 
-
-            // check if the kingpiece's location exsists in the enemyPlayerMoveList
-            ChessPiece kingPiece = currentTurnList[0];
-            Point kingLocation = kingPiece.pieceBoardLocation;
-
-            // fetch all potential moves for currentPlayerMoveLIst
-            currentPlayerMoveList = returnAllPlayerMoves(currentTurnList, false, kingLocation);
-
-            // fetch all potential moves for enemyPlayerMoveList
-            enemyPlayerMoveList = returnAllPlayerMoves(enemyList, true, kingLocation);
-
-
+            // this is a linq statement that checks if the king is in check (does king's location exist in enemymovelist)
             inCheck = enemyPlayerMoveList.Contains(kingLocation);
 
             // check if king is in checkmate if king is in check
@@ -1005,7 +979,37 @@ namespace ChessGame
             return inCheck;
         }
 
-        public 
+        /// <summary>
+        /// sets the following dynamically based one which player's turn it is:
+        /// this function sets a list for enemy pieces and ally pieces as well as setting all potential enemy and ally moves to lists
+        /// the currenty ally king's location is also set in this function
+        /// </summary>
+        public void setPieceVariables()
+        {
+
+            // determine if it is black/white player's turn and set enemyList = to the opposite
+            if (boardTurn.colorPlayerTurn == 0)
+            {
+                enemyList = blackPieces;
+                currentTurnList = whitePieces;
+            }
+            else
+            {
+                enemyList = whitePieces;
+                currentTurnList = blackPieces;
+            }
+
+            // fetch all potential moves for currentPlayerMoveLIst
+            currentPlayerMoveList = returnAllPlayerMoves(currentTurnList, false, kingLocation);
+
+            // fetch all potential moves for enemyPlayerMoveList
+            enemyPlayerMoveList = returnAllPlayerMoves(enemyList, true, kingLocation);
+
+            // stores the current ally king's location
+             kingPiece = currentTurnList[0];
+             kingLocation = kingPiece.pieceBoardLocation;
+
+        }
 
         /// <summary>
         /// checks if the king who's turn it is can get out of check
@@ -1041,7 +1045,11 @@ namespace ChessGame
 
 
             // 2. if can't move out, can a friendly piece block check
-
+            else if(canBlockCheck())
+            {
+                canGetOutOfCheck = true;
+                return canGetOutOfCheck;
+            }
 
             // 3. also can pieces that have king in check be taken?
 
@@ -1061,7 +1069,7 @@ namespace ChessGame
         }
 
         /// <summary>
-        /// checks if check can be blocked for a piece that have king in check, check 2 of 3
+        /// checks if check can be blocked for a piece that has king in check, check 2 of 3
         /// </summary>
         /// <returns></returns>
         bool canBlockCheck()
@@ -1070,15 +1078,17 @@ namespace ChessGame
 
             List<Point> blockerSquares = new List<Point>();
            
-            // loop through these checks for each piece that has king in check
+            // run this code for each piece that has king in check
             foreach(ChessPiece piece in checkerPieceList)
             {
 
                 // identify spaces that if a piece were present on, would block check
-        //blockerSquares = canBlockCheck_IdentifyBlockingSquares()
+                blockerSquares = canBlockCheck_IdentifyBlockingSquares(currentPlayerMoveList, kingLocation, piece);
 
-                // check to see if any enemy pieces are able to move onto blocking spaces
+                // check to see if any ally pieces are able to move onto spaces that would block check
+                canBlock = currentPlayerMoveList.Any(blockerSquares.Contains);
 
+                // result of the above check will return if any pieces can move onto blocking squares below
             }
 
             return canBlock;
