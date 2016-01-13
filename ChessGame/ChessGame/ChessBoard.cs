@@ -26,7 +26,7 @@ namespace ChessGame
         public ChessboardSquare previousClickedSquare = null;
         public List<ChessPiece> takenList = new List<ChessPiece>();
         public PlayerTurn boardTurn { get; set; }
-        public List<ChessPiece> checkerPieceList { get; set; }
+        public List<ChessPiece> checkerPieceList { get; set; }              // a list of pieces that have king in check
         public List<Point> enemyPlayerMoveList { get; set; }                // all potential enemy moves
         public List<Point> currentPlayerMoveList { get; set; }              // all potential current player moves
         public List<ChessPiece> currentTurnList { get; set; }               // all current player's piece objects
@@ -1053,6 +1053,8 @@ namespace ChessGame
 
             // 3. also can pieces that have king in check be taken?
 
+
+
             return canGetOutOfCheck;
 
         }
@@ -1217,12 +1219,47 @@ namespace ChessGame
         }
 
         /// <summary>
-        /// checks if pieces that have king in check can be taken
+        /// checks if pieces that have king in check can be taken check 3 of 3 (canGetOutOfCheck)
         /// </summary>
         /// <returns></returns>
-        bool canTakeCheckPiece()
+        bool canTakeCheckPieces()
         {
             bool canTake = false;
+
+
+            if(checkerPieceList.Any())
+            {
+                // loop through each piece that has king in check and check if it can be taken
+                foreach (ChessPiece piece in checkerPieceList)
+                {
+                    // store the location of each enemy piece locally on each iteration
+                    Point enemyPieceLocation = piece.pieceBoardLocation;
+                    
+                    // check if enemy piece location exists in potential ally piece moves 
+                    canTake = currentPlayerMoveList.Contains(enemyPieceLocation);
+
+                    // check if each piece can be taken
+                    if()
+                    {
+
+                    }
+                    // if at any point one pice cannot be taken then the whole function immediately returns false 
+                    else
+                    {
+                        return false;
+                    }
+
+
+                }
+
+                    
+            }
+            // if for some strange reason the checkerPieceList is empty, return true because there are no pieces that need to be taken
+            else
+            {
+                canTake = true;
+            }
+            
 
 
             return canTake;
